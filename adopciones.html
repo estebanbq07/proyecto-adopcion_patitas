@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explorá el catálogo de mascotas disponibles para adopción en Patitas CR. Filtrá por especie, tamaño y temperamento.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/catalogo.css">
+    <title>Patitas CR | Adoptar Mascotas</title>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
+                <span class="logo-paw">🐾</span>
+                <strong>Patitas CR</strong>
+            </a>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </label>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a class="active-link" href="adopciones.html">Adoptar</a></li>
+                    <li><a href="registro.html">Mi Perfil</a></li>
+                    <li><a href="index.html#sobre-nosotros">Nosotros</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb" aria-label="Ubicación actual">
+        <div class="container">
+            <a href="index.html">Inicio</a>
+            <span>Adoptar Mascotas</span>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- HERO DEL CATÁLOGO -->
+        <section class="catalogo-hero">
+            <div class="container">
+                <h1>Encontrá a tu compañero ideal</h1>
+                <p>Usá los filtros para encontrar la mascota que mejor se adapte a tu vida.</p>
+
+                <!-- Estadísticas dinámicas -->
+                <div class="catalogo-stats" id="catalogo-stats" aria-live="polite">
+                    <span id="stat-mostrando">Cargando...</span>
+                    <span class="stat-sep" aria-hidden="true">·</span>
+                    <span id="stat-favoritos">❤️ 0 favoritos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTROLES: BÚSQUEDA + FILTROS -->
+        <section class="controles-section" aria-label="Buscar y filtrar mascotas">
+            <div class="container controles-wrapper">
+
+                <!-- Búsqueda instantánea -->
+                <div class="busqueda-wrapper">
+                    <label for="campo-busqueda" class="sr-only">Buscar mascota por nombre o raza</label>
+                    <span class="busqueda-icono" aria-hidden="true"></span>
+                    <input
+                        type="search"
+                        id="campo-busqueda"
+                        class="campo-busqueda"
+                        placeholder="Buscar por nombre o raza..."
+                        autocomplete="off"
+                        aria-label="Buscar mascota"
+                    >
+                </div>
+
+                <!-- Filtros -->
+                <div class="filtros-grupo" role="group" aria-label="Filtros de búsqueda">
+
+                    <div class="filtro-item">
+                        <label for="filtro-especie">Especie</label>
+                        <select id="filtro-especie" class="filtro-select">
+                            <option value="todos">Todos</option>
+                            <option value="perro"> Perros</option>
+                            <option value="gato"> Gatos</option>
+                        </select>
+                    </div>
+
+                    <div class="filtro-item">
+                        <label for="filtro-tamaño">Tamaño</label>
+                        <select id="filtro-tamaño" class="filtro-select">
+                            <option value="todos">Todos</option>
+                            <option value="pequeño">Pequeño</option>
+                            <option value="mediano">Mediano</option>
+                            <option value="grande">Grande</option>
+                        </select>
+                    </div>
+
+                    <div class="filtro-item">
+                        <label for="filtro-temperamento">Temperamento</label>
+                        <select id="filtro-temperamento" class="filtro-select">
+                            <option value="todos">Todos</option>
+                            <option value="tranquilo">Tranquilo</option>
+                            <option value="activo">Activo</option>
+                            <option value="juguetón">Juguetón</option>
+                            <option value="amigable">Amigable</option>
+                            <option value="independiente">Independiente</option>
+                        </select>
+                    </div>
+
+                    <div class="filtro-item">
+                        <label for="filtro-vista">Solo favoritos</label>
+                        <select id="filtro-vista" class="filtro-select">
+                            <option value="todos">Todos</option>
+                            <option value="favoritos"> Mis favoritos</option>
+                            <option value="urgentes"> Urgentes</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-limpiar" class="btn-limpiar" aria-label="Limpiar todos los filtros">
+                        ✕ Limpiar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRID DE MASCOTAS -->
+        <section class="catalogo-section" aria-labelledby="titulo-catalogo">
+            <div class="container">
+                <h2 id="titulo-catalogo" class="sr-only">Mascotas disponibles</h2>
+
+                <!-- Toast de notificación -->
+                <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+                <!-- Grid dinámico -->
+                <div id="grid-mascotas" class="mascotas-grid" aria-live="polite">
+                    <p class="estado-cargando">Cargando mascotas...</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MODAL DE SOLICITUD DE ADOPCIÓN -->
+        <div id="modal-adopcion" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" hidden>
+            <div class="modal-caja">
+                <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar modal">✕</button>
+
+                <div class="modal-encabezado">
+                    <span id="modal-emoji" aria-hidden="true">🐾</span>
+                    <h2 id="modal-titulo">Solicitar adopción</h2>
+                    <p id="modal-subtitulo">Completá el formulario para expresar tu interés.</p>
+                </div>
+
+                <form id="form-adopcion" novalidate>
+                    <input type="hidden" id="adopcion-mascota-id">
+                    <input type="hidden" id="adopcion-mascota-nombre">
+
+                    <div class="campo-grupo">
+                        <label for="adopcion-nombre">Tu nombre completo *</label>
+                        <input type="text" id="adopcion-nombre" placeholder="Ej: María Rodríguez" autocomplete="name">
+                        <span class="campo-error" id="error-adopcion-nombre"></span>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="adopcion-email">Correo electrónico *</label>
+                        <input type="email" id="adopcion-email" placeholder="Ej: maria@correo.com" autocomplete="email">
+                        <span class="campo-error" id="error-adopcion-email"></span>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="adopcion-telefono">Teléfono *</label>
+                        <input type="tel" id="adopcion-telefono" placeholder="Ej: 8888-8888" autocomplete="tel">
+                        <span class="campo-error" id="error-adopcion-telefono"></span>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="adopcion-vivienda">Tipo de vivienda *</label>
+                        <select id="adopcion-vivienda">
+                            <option value="">Seleccioná una opción</option>
+                            <option value="casa-patio">Casa con patio</option>
+                            <option value="casa-sin-patio">Casa sin patio</option>
+                            <option value="apartamento">Apartamento</option>
+                        </select>
+                        <span class="campo-error" id="error-adopcion-vivienda"></span>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="adopcion-mensaje">¿Por qué querés adoptar a esta mascota?</label>
+                        <textarea id="adopcion-mensaje" rows="3" placeholder="Contanos un poco sobre vos y tu hogar..."></textarea>
+                    </div>
+
+                    <div class="modal-acciones">
+                        <button type="submit" class="btn-primary" id="btn-enviar-adopcion">Enviar solicitud</button>
+                        <button type="button" class="btn-cancelar" id="btn-cancelar-modal">Cancelar</button>
+                    </div>
+                </form>
+
+                <!-- Estado de confirmación -->
+                <div id="modal-confirmacion" class="modal-confirmacion" hidden>
+                    <span class="confirmacion-icono" aria-hidden="true">✅</span>
+                    <h3>¡Solicitud enviada!</h3>
+                    <p id="confirmacion-texto"></p>
+                    <button class="btn-primary" id="btn-cerrar-confirmacion">Entendido</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="container footer-content">
+            <div class="footer-marca">
+                <p class="footer-logo"><span aria-hidden="true">🐾</span> Patitas CR</p>
+                <p>Conectando animales con familias responsables en Costa Rica.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Navegación del pie de página">
+                <h5>Navegación</h5>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="adopciones.html">Catálogo de mascotas</a></li>
+                    <li><a href="registro.html">Mi perfil</a></li>
+                </ul>
+            </nav>
+            <address class="footer-contacto">
+                <h5>Contacto</h5>
+                Patitas Costa Rica<br>
+                <a href="mailto:info@patitascr.org">info@patitascr.org</a><br>
+                Alajuela, Costa Rica
+            </address>
+        </div>
+        <div class="footer-bottom">
+            <small>© 2026 Patitas CR · Desarrollo académico – UTN · Todos los derechos reservados.</small>
+        </div>
+    </footer>
+
+    <script src="js/catalogo.js"></script>
+
+</body>
+</html>
