@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "mascota": "Luna",
+    "familia": "Familia Rodríguez",
+    "historia": "Luna llegó muy tímida al albergue y hoy se ha convertido en una compañera inseparable de los niños.",
+    "fecha": "2026-03-12",
+    "imagen": "images/historias/luna.jpg"
+  },
+  {
+    "id": 2,
+    "mascota": "Bruno",
+    "familia": "Familia Morales",
+    "historia": "Bruno se adaptó rápido y ahora disfruta de caminatas diarias en el parque del barrio.",
+    "fecha": "2026-02-28",
+    "imagen": "images/historias/bruno.jpg"
+  },
+  {
+    "id": 3,
+    "mascota": "Kiara",
+    "familia": "Familia Salas",
+    "historia": "Kiara era muy asustadiza, pero con paciencia y amor hoy es una gata confiada y cariñosa.",
+    "fecha": "2026-01-19",
+    "imagen": "images/historias/kiara.jpg"
+  },
+  {
+    "id": 4,
+    "mascota": "Rocky",
+    "familia": "Familia Castro",
+    "historia": "Rocky encontró un hogar donde puede correr y descansar seguro después de su recuperación.",
+    "fecha": "2026-04-03",
+    "imagen": "images/historias/rocky.jpg"
+  },
+  {
+    "id": 5,
+    "mascota": "Mía",
+    "familia": "Familia Herrera",
+    "historia": "Mía llegó pequeñita y curiosa; hoy llenó el hogar de risas y muchas aventuras.",
+    "fecha": "2026-05-10",
+    "imagen": "images/historias/mia.jpg"
+  },
+  {
+    "id": 6,
+    "mascota": "Simba",
+    "familia": "Familia Vega",
+    "historia": "Simba encontró un lugar lleno de cariño y ahora es el guardián de su casa.",
+    "fecha": "2026-06-02",
+    "imagen": "images/historias/simba.jpg"
+  }
+]
