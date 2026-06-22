@@ -147,8 +147,11 @@ p:last-child { margin-bottom: 0; }
     white-space: nowrap;
 }
 
-.logo-paw {
-    font-size: 1.6rem;
+.logo-image {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 /* Hamburguesa — oculta en escritorio */
