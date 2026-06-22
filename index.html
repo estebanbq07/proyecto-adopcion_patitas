@@ -1,245 +1,190 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Patitas CR es la plataforma para adopción responsable de animales en Costa Rica. Conectamos albergues con familias amorosas.">
-    <meta name="keywords"
-        content="adopción mascotas, albergues animales, perros adopción, gatos, Costa Rica, bienestar animal">
-    <meta name="author" content="Patitas CR">
+    <meta name="description" content="Patitas CR conecta animales en adopción con familias responsables en Costa Rica.">
     <link rel="stylesheet" href="css/style.css">
-    <title>Patitas CR | Adopción Responsable</title>
+    <title>Patitas CR | Inicio</title>
 </head>
-
 <body>
 
-    <header class="site-header">
-        <div class="container header-content">
-            <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
-                <span class="logo-paw">🐾</span>
-                <strong>Patitas CR</strong>
-            </a>
+<header class="site-header">
+    <div class="container header-content">
+        <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
+            <span class="logo-paw">🐾</span><strong>Patitas CR</strong>
+        </a>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+        </label>
+        <nav class="main-nav" aria-label="Navegación principal">
+            <ul>
+                <li><a class="active-link" href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Adoptar</a></li>
+                <li><a href="gestion.html">Solicitudes</a></li>
+                <li><a href="#sobre-nosotros">Nosotros</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-            <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
+<nav class="breadcrumb" aria-label="Ubicación actual">
+    <div class="container"><a href="index.html">Inicio</a><span>Inicio</span></div>
+</nav>
 
-            <nav class="main-nav" aria-label="Navegación principal">
-                <ul>
-                    <li><a class="active-link" href="index.html">Inicio</a></li>
-                    <li><a href="catalogo.html">Adoptar</a></li>
-                    <li><a href="registro.html">Mi Perfil</a></li>
-                    <li><a href="#sobre-nosotros">Nosotros</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<main>
 
-    <nav class="breadcrumb" aria-label="Ubicación actual">
-        <div class="container">
-            <a href="index.html">Inicio</a>
-            <span>Inicio</span>
-        </div>
-    </nav>
+    <section class="hero" aria-labelledby="hero-titulo">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">🐾 Adopta, no compres</span>
+                <h1 id="hero-titulo">Cada patita merece<br><em>un hogar con amor</em></h1>
+                <p class="hero-desc">Los albergues de Costa Rica están llenos. Miles de perros y gatos esperan una familia responsable. Acá los conectamos contigo de forma fácil y segura.</p>
 
-    <main>
-
-        <section class="hero" aria-labelledby="hero-titulo">
-            <div class="container hero-content">
-
-                <div class="hero-text">
-                    <span class="hero-badge">🐾 Adopta, no compres</span>
-
-                    <h1 id="hero-titulo">
-                        Cada patita merece<br>
-                        <em>un hogar con amor</em>
-                    </h1>
-
-                    <p class="hero-desc">
-                        Los albergues de Costa Rica están llenos. Miles de perros y gatos esperan
-                        una familia responsable. Acá los conectamos contigo de forma fácil y segura.
-                    </p>
-
-                    <div class="hero-contador" id="contador-mascotas" aria-live="polite">
-                        <div class="contador-item">
-                            <span class="contador-num" id="num-total">–</span>
-                            <span class="contador-label">mascotas disponibles</span>
-                        </div>
-                        <div class="contador-item">
-                            <span class="contador-num" id="num-perros">–</span>
-                            <span class="contador-label">perros</span>
-                        </div>
-                        <div class="contador-item">
-                            <span class="contador-num" id="num-gatos">–</span>
-                            <span class="contador-label">gatos</span>
-                        </div>
+                <div class="hero-contador" id="contador-mascotas" aria-live="polite">
+                    <div class="contador-item">
+                        <span class="contador-num" id="num-total">–</span>
+                        <span class="contador-label">mascotas disponibles</span>
                     </div>
+                    <div class="contador-item">
+                        <span class="contador-num" id="num-perros">–</span>
+                        <span class="contador-label">perros</span>
+                    </div>
+                    <div class="contador-item">
+                        <span class="contador-num" id="num-gatos">–</span>
+                        <span class="contador-label">gatos</span>
+                    </div>
+                </div>
 
-                    <div class="hero-actions">
+                <div class="hero-actions">
                     <a href="catalogo.html" class="btn-primary">Ver mascotas disponibles</a>
-                        <a href="#como-funciona" class="btn-link">¿Cómo funciona?</a>
-                    </div>
+                    <a href="gestion.html" class="btn-outline" style="color:var(--azul);border-color:var(--azul);">Registrarse</a>
+                    <a href="#como-funciona" class="btn-link">¿Cómo funciona?</a>
                 </div>
-
-                <figure class="hero-image">
-                    <img src="img/hero-pets.jpg"
-                        alt="Perro y gato felices esperando adopción en un albergue de Costa Rica"
-                        onerror="this.closest('figure').classList.add('hero-image--fallback')">
-                    <figcaption>Cada adopción cambia dos vidas: la del animal y la tuya.</figcaption>
-                </figure>
-
             </div>
-        </section>
 
-        <div class="paw-divider" aria-hidden="true">
-            <span>🐾</span><span>🐾</span><span>🐾</span>
+            <figure class="hero-image">
+                <img src="img/hero-pets.jpg" alt="Perro y gato esperando adopción en un albergue de Costa Rica"
+                    onerror="this.closest('figure').style.background='var(--crema-oscuro)';this.style.display='none';">
+                <figcaption>Cada adopción cambia dos vidas: la del animal y la tuya.</figcaption>
+            </figure>
         </div>
+    </section>
 
-        <section id="como-funciona" aria-labelledby="titulo-como">
-            <div class="container">
-                <h2 id="titulo-como">¿Cómo funciona Patitas CR?</h2>
-                <p class="seccion-desc">Tres pasos sencillos para encontrar a tu compañero ideal.</p>
+    <div class="paw-divider" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span></div>
 
-                <div class="pasos-grid">
-                    <article class="paso-card">
-                        <div class="paso-icono" aria-hidden="true"></div>
-                        <h3>1. Explorá el catálogo</h3>
-                        <p>
-                            Usá los filtros por especie, tamaño y temperamento para encontrar
-                            la mascota que mejor se adapte a tu estilo de vida y hogar.
-                        </p>
-                    </article>
-
-                    <article class="paso-card">
-                        <div class="paso-icono" aria-hidden="true"></div>
-                        <h3>2. Guardá tus favoritos</h3>
-                        <p>
-                            Marcá las mascotas que más te gusten. Tu lista se guarda automáticamente
-                            para que puedas retomar tu búsqueda en cualquier momento.
-                        </p>
-                    </article>
-
-                    <article class="paso-card">
-                        <div class="paso-icono" aria-hidden="true"></div>
-                        <h3>3. Registrá tu interés</h3>
-                        <p>
-                            Completá tu perfil, dejá tu feedback de adoptante y contactá
-                            al albergue. Juntos encontramos el hogar perfecto para cada animal.
-                        </p>
-                    </article>
-                </div>
+    <section id="como-funciona" aria-labelledby="titulo-como">
+        <div class="container">
+            <h2 id="titulo-como">¿Cómo funciona Patitas CR?</h2>
+            <p class="seccion-desc">Tres pasos sencillos para encontrar a tu compañero ideal.</p>
+            <div class="pasos-grid">
+                <article class="paso-card">
+                    <span class="paso-icono" aria-hidden="true">🔍</span>
+                    <h3>1. Explorá el catálogo</h3>
+                    <p>Filtrá por especie, tamaño y edad para encontrar la mascota perfecta para tu estilo de vida.</p>
+                </article>
+                <article class="paso-card">
+                    <span class="paso-icono" aria-hidden="true">❤️</span>
+                    <h3>2. Guardá tus favoritos</h3>
+                    <p>Marcá las mascotas que más te gusten. Tu lista se guarda automáticamente para retomar tu búsqueda.</p>
+                </article>
+                <article class="paso-card">
+                    <span class="paso-icono" aria-hidden="true">🏠</span>
+                    <h3>3. Enviá tu solicitud</h3>
+                    <p>Completá el formulario de adopción y el albergue se pondrá en contacto con vos.</p>
+                </article>
             </div>
-        </section>
-
-        <div class="paw-divider" aria-hidden="true">
-            <span>🐾</span><span>🐾</span><span>🐾</span>
         </div>
+    </section>
 
-        <section id="sobre-nosotros" aria-labelledby="titulo-sobre">
-            <div class="container">
-                <h2 id="titulo-sobre">¿Por qué elegir Patitas CR?</h2>
-                <p class="seccion-desc">
-                    Los albergues costarricenses enfrentan sobrepoblación crítica. 
-                    Nuestra plataforma facilita la adopción de forma estructurada, 
-                    transparente y segura.
-                </p>
+    <div class="paw-divider" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span></div>
 
-                <div class="beneficios-grid">
-                    <article class="beneficio-card">
-                        <span class="beneficio-icono" aria-hidden="true"></span>
-                        <h4>Filtros inteligentes</h4>
-                        <p>Encontrá animales compatibles con tu espacio, rutina y familia filtrando por especie, tamaño y temperamento.</p>
-                    </article>
-
-                    <article class="beneficio-card">
-                        <span class="beneficio-icono" aria-hidden="true"></span>
-                        <h4>Catálogo transparente</h4>
-                        <p>Conocé la historia, estado de salud y personalidad real de cada mascota antes de tomar una decisión.</p>
-                    </article>
-
-                    <article class="beneficio-card">
-                        <span class="beneficio-icono" aria-hidden="true"></span>
-                        <h4>Comunidad confiable</h4>
-                        <p>Consultá el feedback real de adoptantes anteriores para guiarte en tu propio proceso de adopción.</p>
-                    </article>
-
-                    <article class="beneficio-card">
-                        <span class="beneficio-icono" aria-hidden="true"></span>
-                        <h4>Proceso seguro</h4>
-                        <p>Verificamos los perfiles de adoptantes para garantizar que cada mascota llegue a un hogar responsable.</p>
-                    </article>
-                </div>
+    <section id="sobre-nosotros" aria-labelledby="titulo-sobre">
+        <div class="container">
+            <h2 id="titulo-sobre">¿Por qué elegir Patitas CR?</h2>
+            <p class="seccion-desc">Los albergues costarricenses enfrentan sobrepoblación crítica. Facilitamos la adopción de forma estructurada, transparente y segura.</p>
+            <div class="beneficios-grid">
+                <article class="beneficio-card">
+                    <span class="beneficio-icono" aria-hidden="true">🎛️</span>
+                    <h4>Filtros inteligentes</h4>
+                    <p>Encontrá animales compatibles filtrando por especie, tamaño, edad y temperamento.</p>
+                </article>
+                <article class="beneficio-card">
+                    <span class="beneficio-icono" aria-hidden="true">📋</span>
+                    <h4>Catálogo transparente</h4>
+                    <p>Conocé la historia, estado de salud y personalidad real de cada mascota disponible.</p>
+                </article>
+                <article class="beneficio-card">
+                    <span class="beneficio-icono" aria-hidden="true">⭐</span>
+                    <h4>Comunidad confiable</h4>
+                    <p>Consultá el feedback real de adoptantes anteriores para guiarte en tu proceso.</p>
+                </article>
+                <article class="beneficio-card">
+                    <span class="beneficio-icono" aria-hidden="true">🔒</span>
+                    <h4>Proceso seguro</h4>
+                    <p>Verificamos solicitudes para garantizar que cada mascota llegue a un hogar responsable.</p>
+                </article>
             </div>
-        </section>
-
-        <div class="paw-divider" aria-hidden="true">
-            <span>🐾</span><span>🐾</span><span>🐾</span>
         </div>
+    </section>
 
-        <section id="finales-felices" aria-labelledby="titulo-exitos">
-            <div class="container">
-                <h2 id="titulo-exitos">Finales Felices </h2>
-                <p class="seccion-desc">Ellos ya encontraron su hogar. Sus historias inspiran a seguir.</p>
+    <div class="paw-divider" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span></div>
 
-                <div id="contenedor-casos" class="casos-grid" aria-live="polite">
-                    <p class="estado-cargando">Cargando historias...</p>
-                </div>
-
-                <div class="casos-cta">
-                    <a href="catalogo.html" class="btn-primary">Ver mascotas disponibles ahora</a>
-                </div>
+    <section id="finales-felices" aria-labelledby="titulo-exitos">
+        <div class="container">
+            <h2 id="titulo-exitos">Finales Felices 🎉</h2>
+            <p class="seccion-desc">Ellos ya encontraron su hogar. Sus historias inspiran a seguir.</p>
+            <div id="contenedor-casos" class="casos-grid" aria-live="polite">
+                <p class="estado-cargando">Cargando historias...</p>
             </div>
-        </section>
-        <section class="cta-section" aria-labelledby="titulo-cta">
-            <div class="container cta-content">
-                <div class="cta-text">
-                    <h2 id="titulo-cta">¿Listo para cambiar una vida?</h2>
-                    <p>Un animal te está esperando. El proceso es más sencillo de lo que creés.</p>
-                </div>
-                <div class="cta-acciones">
-                    <a href="catalogo.html" class="btn-primary btn-grande">Empezar a adoptar</a>
-                    <a href="registro.html" class="btn-outline btn-grande">Crear mi perfil</a>
-                </div>
+            <div class="casos-cta">
+                <a href="catalogo.html" class="btn-primary">Ver mascotas disponibles ahora</a>
             </div>
-        </section>
-
-    </main>
-
-    <footer id="contacto">
-        <div class="container footer-content">
-            <div class="footer-marca">
-                <p class="footer-logo"><span aria-hidden="true">🐾</span> Patitas CR</p>
-                <p>Conectando animales con familias responsables en Costa Rica.</p>
-            </div>
-
-            <nav class="footer-nav" aria-label="Navegación del pie de página">
-                <h5>Navegación</h5>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="catalogo.html">Catálogo de mascotas</a></li>
-                    <li><a href="registro.html">Mi perfil</a></li>
-                </ul>
-            </nav>
-
-            <address class="footer-contacto">
-                <h5>Contacto</h5>
-                Patitas Costa Rica<br>
-                <a href="mailto:info@patitascr.org">info@patitascr.org</a><br>
-                Alajuela, Costa Rica
-            </address>
         </div>
+    </section>
 
-        <div class="footer-bottom">
-            <small>© 2026 Patitas CR </small>
+    <section class="cta-section" aria-labelledby="titulo-cta">
+        <div class="container cta-content">
+            <div class="cta-text">
+                <h2 id="titulo-cta">¿Listo para cambiar una vida?</h2>
+                <p>Un animal te está esperando. El proceso es más sencillo de lo que creés.</p>
+            </div>
+            <div class="cta-acciones">
+                <a href="catalogo.html" class="btn-primary btn-grande">Ver mascotas</a>
+                <a href="gestion.html" class="btn-outline btn-grande">Contactar refugio</a>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script src="js/main.js"></script>
+</main>
 
+<footer id="contacto">
+    <div class="container footer-content">
+        <div class="footer-marca">
+            <p class="footer-logo">🐾 Patitas CR</p>
+            <p>Conectando animales con familias responsables en Costa Rica.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Pie de página">
+            <h5>Navegación</h5>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catálogo de mascotas</a></li>
+                <li><a href="gestion.html">Solicitudes</a></li>
+            </ul>
+        </nav>
+        <address class="footer-contacto">
+            <h5>Contacto</h5>
+            Patitas Costa Rica<br>
+            <a href="mailto:info@patitascr.org">info@patitascr.org</a><br>
+            Alajuela, Costa Rica
+        </address>
+    </div>
+    <div class="footer-bottom">
+        <small>© 2026 Patitas CR · Desarrollo académico – UTN · Todos los derechos reservados.</small>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

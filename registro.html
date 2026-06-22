@@ -1,338 +1,230 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Creá tu perfil de adoptante en Patitas CR y formá parte de nuestra comunidad de adopción responsable.">
+    <meta name="description" content="Registrá y gestioná tus solicitudes de adopción en Patitas CR.">
     <link rel="stylesheet" href="css/style.css">
-    <title>Patitas CR | Mi Perfil</title>
+    <title>Patitas CR | Solicitudes de Adopción</title>
 </head>
-
 <body>
 
-    <!-- HEADER -->
-    <header class="site-header">
-        <div class="container header-content">
-            <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
-                <span class="logo-paw">🐾</span>
-                <strong>Patitas CR</strong>
-            </a>
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-            <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
-                <span></span><span></span><span></span>
-            </label>
-            <nav class="main-nav" aria-label="Navegación principal">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="catalogo.html">Adoptar</a></li>
-                    <li><a class="active-link" href="registro.html">Mi Perfil</a></li>
-                    <li><a href="index.html#sobre-nosotros">Nosotros</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header class="site-header">
+    <div class="container header-content">
+        <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
+            <span class="logo-paw">🐾</span><strong>Patitas CR</strong>
+        </a>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
+            <span></span><span></span><span></span>
+        </label>
+        <nav class="main-nav" aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Adoptar</a></li>
+                <li><a class="active-link" href="gestion.html">Solicitudes</a></li>
+                <li><a href="index.html#sobre-nosotros">Nosotros</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-    <!-- BREADCRUMB -->
-    <nav class="breadcrumb" aria-label="Ubicación actual">
+<nav class="breadcrumb" aria-label="Ubicación actual">
+    <div class="container"><a href="index.html">Inicio</a><span>Solicitudes de Adopción</span></div>
+</nav>
+
+<main>
+
+    <section class="gestion-hero">
         <div class="container">
-            <a href="index.html">Inicio</a>
-            <span>Mi Perfil</span>
+            <h1>Solicitudes de Adopción</h1>
+            <p>Registrá tu interés en adoptar una mascota. Podés editar o eliminar tus solicitudes en cualquier momento.</p>
         </div>
-    </nav>
+    </section>
 
-    <main>
+    <div class="paw-divider" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span></div>
 
-        <!-- HERO -->
-        <section class="gestion-hero">
-            <div class="container">
-                <h1>Tu perfil de adoptante</h1>
-                <p>Completá tu información para que los albergues puedan conocerte y encontrar la mascota ideal para vos.</p>
-            </div>
-        </section>
+    <section class="gestion-layout-section">
+        <div class="container gestion-layout">
 
-        <div class="paw-divider" aria-hidden="true">
-            <span>🐾</span><span>🐾</span><span>🐾</span>
-        </div>
+            <!-- ── FORMULARIO ── -->
+            <div class="gestion-formulario-col">
+                <div class="formulario-wrapper">
 
-        <!-- LAYOUT PRINCIPAL -->
-        <section class="gestion-layout-section">
-            <div class="container gestion-layout">
-
-                <!-- ── COLUMNA IZQUIERDA: FORMULARIO ── -->
-                <div class="gestion-formulario-col">
-
-                    <!-- Estado: si ya hay perfil guardado -->
-                    <div id="perfil-existente" class="perfil-existente" hidden>
-                        <div class="perfil-avatar" id="perfil-avatar" aria-hidden="true">👤</div>
-                        <div class="perfil-info">
-                            <h2 id="perfil-nombre-display">–</h2>
-                            <p id="perfil-email-display" class="perfil-dato">–</p>
-                            <p id="perfil-fecha-display" class="perfil-fecha">–</p>
-                        </div>
-                        <button id="btn-editar-perfil" class="btn-editar"> Editar perfil</button>
+                    <!-- Encabezado dinámico según modo (nueva / editar) -->
+                    <div class="form-encabezado">
+                        <h2 id="form-titulo">Nueva solicitud de adopción</h2>
+                        <p>Campos marcados con <span aria-label="obligatorio">*</span> son obligatorios.</p>
                     </div>
 
-                    <!-- Formulario de perfil -->
-                    <div id="formulario-wrapper" class="formulario-wrapper">
-                        <div class="form-encabezado">
-                            <h2>Registrá tus datos</h2>
-                            <p>Todos los campos marcados con <span aria-label="obligatorio">*</span> son obligatorios.</p>
-                        </div>
+                    <!-- Aviso de mascota preseleccionada desde catálogo -->
+                    <div id="aviso-mascota" class="aviso-mascota" hidden>
+                        <span aria-hidden="true">🐾</span>
+                        <span id="aviso-mascota-texto">Vas a solicitar la adopción de <strong id="aviso-nombre"></strong></span>
+                        <button id="btn-quitar-mascota" aria-label="Quitar mascota preseleccionada">✕</button>
+                    </div>
 
-                        <form id="form-perfil" novalidate>
+                    <form id="form-solicitud" novalidate>
+                        <input type="hidden" id="sol-id-edicion">
 
-                            <!-- Datos personales -->
-                            <fieldset class="form-fieldset">
-                                <legend>Datos personales</legend>
-
-                                <div class="campo-grupo">
-                                    <label for="perfil-nombre">Nombre completo *</label>
-                                    <input
-                                        type="text"
-                                        id="perfil-nombre"
-                                        placeholder="Ej: María Rodríguez"
-                                        autocomplete="name"
-                                        maxlength="80"
-                                    >
-                                    <span class="campo-error" id="error-nombre"></span>
-                                </div>
-
-                                <div class="campos-fila">
-                                    <div class="campo-grupo">
-                                        <label for="perfil-email">Correo electrónico *</label>
-                                        <input
-                                            type="email"
-                                            id="perfil-email"
-                                            placeholder="Ej: maria@correo.com"
-                                            autocomplete="email"
-                                        >
-                                        <span class="campo-error" id="error-email"></span>
-                                    </div>
-
-                                    <div class="campo-grupo">
-                                        <label for="perfil-telefono">Teléfono *</label>
-                                        <input
-                                            type="tel"
-                                            id="perfil-telefono"
-                                            placeholder="Ej: 8888-8888"
-                                            autocomplete="tel"
-                                        >
-                                        <span class="campo-error" id="error-telefono"></span>
-                                    </div>
-                                </div>
-
-                                <div class="campo-grupo">
-                                    <label for="perfil-provincia">Provincia *</label>
-                                    <select id="perfil-provincia" autocomplete="address-level1">
-                                        <option value="">Seleccioná tu provincia</option>
-                                        <option value="San José">San José</option>
-                                        <option value="Alajuela">Alajuela</option>
-                                        <option value="Cartago">Cartago</option>
-                                        <option value="Heredia">Heredia</option>
-                                        <option value="Guanacaste">Guanacaste</option>
-                                        <option value="Puntarenas">Puntarenas</option>
-                                        <option value="Limón">Limón</option>
-                                    </select>
-                                    <span class="campo-error" id="error-provincia"></span>
-                                </div>
-                            </fieldset>
-
-                            <!-- Información del hogar -->
-                            <fieldset class="form-fieldset">
-                                <legend>Información de tu hogar</legend>
-
-                                <div class="campos-fila">
-                                    <div class="campo-grupo">
-                                        <label for="perfil-vivienda">Tipo de vivienda *</label>
-                                        <select id="perfil-vivienda">
-                                            <option value="">Seleccioná</option>
-                                            <option value="Casa con patio">Casa con patio</option>
-                                            <option value="Casa sin patio">Casa sin patio</option>
-                                            <option value="Apartamento">Apartamento</option>
-                                        </select>
-                                        <span class="campo-error" id="error-vivienda"></span>
-                                    </div>
-
-                                    <div class="campo-grupo">
-                                        <label for="perfil-personas">Personas en el hogar *</label>
-                                        <select id="perfil-personas">
-                                            <option value="">Seleccioná</option>
-                                            <option value="1">1 persona</option>
-                                            <option value="2">2 personas</option>
-                                            <option value="3-4">3 a 4 personas</option>
-                                            <option value="5+">5 o más</option>
-                                        </select>
-                                        <span class="campo-error" id="error-personas"></span>
-                                    </div>
-                                </div>
-
-                                <div class="campo-grupo">
-                                    <label>¿Tenés mascotas actualmente?</label>
-                                    <div class="radio-grupo" role="radiogroup" aria-label="Mascotas actuales">
-                                        <label class="radio-opcion">
-                                            <input type="radio" name="mascotas-actuales" value="no"> No tengo
-                                        </label>
-                                        <label class="radio-opcion">
-                                            <input type="radio" name="mascotas-actuales" value="perros"> Sí, perros
-                                        </label>
-                                        <label class="radio-opcion">
-                                            <input type="radio" name="mascotas-actuales" value="gatos"> Sí, gatos
-                                        </label>
-                                        <label class="radio-opcion">
-                                            <input type="radio" name="mascotas-actuales" value="ambos"> Sí, ambos
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="campo-grupo">
-                                    <label for="perfil-experiencia">Experiencia con mascotas</label>
-                                    <select id="perfil-experiencia">
-                                        <option value="ninguna">Sin experiencia previa</option>
-                                        <option value="poca">Poca experiencia</option>
-                                        <option value="moderada">Experiencia moderada</option>
-                                        <option value="mucha">Mucha experiencia</option>
-                                    </select>
-                                </div>
-                            </fieldset>
-
-                            <!-- Preferencias de adopción -->
-                            <fieldset class="form-fieldset">
-                                <legend>Preferencias de adopción</legend>
-
-                                <div class="campo-grupo">
-                                    <label>¿Qué especie preferís adoptar?</label>
-                                    <div class="checkbox-grupo" role="group" aria-label="Preferencia de especie">
-                                        <label class="checkbox-opcion">
-                                            <input type="checkbox" name="pref-especie" value="perro">
-                                             Perro
-                                        </label>
-                                        <label class="checkbox-opcion">
-                                            <input type="checkbox" name="pref-especie" value="gato">
-                                             Gato
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="campo-grupo">
-                                    <label for="perfil-motivo">¿Por qué querés adoptar? *</label>
-                                    <textarea
-                                        id="perfil-motivo"
-                                        rows="4"
-                                        placeholder="Contanos sobre vos, tu estilo de vida y qué te motiva a adoptar..."
-                                        maxlength="500"
-                                    ></textarea>
-                                    <div class="textarea-contador">
-                                        <span id="contador-motivo">0</span>/500 caracteres
-                                    </div>
-                                    <span class="campo-error" id="error-motivo"></span>
-                                </div>
-                            </fieldset>
-
-                            <!-- Mensaje de resultado -->
-                            <div id="form-mensaje" class="form-mensaje" role="status" aria-live="polite" hidden></div>
-
-                            <!-- Acciones -->
-                            <div class="form-acciones">
-                                <button type="submit" class="btn-primary btn-submit" id="btn-guardar">
-                                    Guardar perfil
-                                </button>
-                                <button type="button" class="btn-resetear" id="btn-resetear">
-                                    Limpiar formulario
-                                </button>
+                        <fieldset class="form-fieldset">
+                            <legend>Tus datos</legend>
+                            <div class="campo-grupo">
+                                <label for="sol-nombre">Nombre completo *</label>
+                                <input type="text" id="sol-nombre" placeholder="Ej: Luis Campos" autocomplete="name" maxlength="80">
+                                <span class="campo-error" id="error-nombre"></span>
                             </div>
+                            <div class="campos-fila">
+                                <div class="campo-grupo">
+                                    <label for="sol-email">Correo electrónico *</label>
+                                    <input type="email" id="sol-email" placeholder="Ej: luis@correo.com" autocomplete="email">
+                                    <span class="campo-error" id="error-email"></span>
+                                </div>
+                                <div class="campo-grupo">
+                                    <label for="sol-telefono">Teléfono *</label>
+                                    <input type="tel" id="sol-telefono" placeholder="Ej: 8888-8888" autocomplete="tel">
+                                    <span class="campo-error" id="error-telefono"></span>
+                                </div>
+                            </div>
+                        </fieldset>
 
-                        </form>
+                        <fieldset class="form-fieldset">
+                            <legend>Mascota de interés</legend>
+                            <div class="campo-grupo">
+                                <label for="sol-mascota">Nombre de la mascota *</label>
+                                <input type="text" id="sol-mascota" placeholder="Ej: Toby">
+                                <span class="campo-error" id="error-mascota"></span>
+                            </div>
+                            <div class="campo-grupo">
+                                <label for="sol-motivo">¿Por qué querés adoptar? *</label>
+                                <textarea id="sol-motivo" rows="4"
+                                    placeholder="Contanos sobre tu hogar, tu estilo de vida y por qué querés adoptar esta mascota..."
+                                    maxlength="500"></textarea>
+                                <div class="textarea-contador">
+                                    <span id="contador-motivo">0</span>/500 caracteres
+                                </div>
+                                <span class="campo-error" id="error-motivo"></span>
+                            </div>
+                        </fieldset>
+
+                        <div id="form-mensaje" class="form-mensaje" role="status" aria-live="polite" hidden></div>
+
+                        <div class="form-acciones">
+                            <button type="submit" class="btn-primary btn-submit" id="btn-enviar">
+                                Enviar solicitud
+                            </button>
+                            <button type="button" class="btn-secundario" id="btn-cancelar-edicion" hidden>
+                                Cancelar edición
+                            </button>
+                            <button type="button" class="btn-secundario" id="btn-limpiar-form">
+                                Limpiar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ── ASIDE ── -->
+            <aside class="gestion-aside" aria-label="Tus solicitudes registradas">
+
+                <div class="aside-card">
+                    <h3>Tu actividad</h3>
+                    <div class="actividad-grid">
+                        <div class="actividad-item">
+                            <span class="actividad-num" id="resumen-solicitudes">0</span>
+                            <span class="actividad-label">Solicitudes</span>
+                        </div>
+                        <div class="actividad-item">
+                            <span class="actividad-num" id="resumen-favoritos">0</span>
+                            <span class="actividad-label">Favoritos</span>
+                        </div>
+                    </div>
+                    <a href="catalogo.html" class="btn-ver-catalogo">Ver catálogo →</a>
+                </div>
+
+                <div class="aside-card">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sm);padding-bottom:10px;border-bottom:1.5px solid var(--crema-oscuro);">
+                        <h3 style="margin:0;border:none;padding:0;">Solicitudes registradas</h3>
+                        <button id="btn-limpiar-todo" class="btn-eliminar-sol" style="display:none;font-size:.8rem;padding:4px 8px;border-radius:var(--r-sm);border:1.5px solid var(--borde);" title="Eliminar todas">
+                            🗑️ Todas
+                        </button>
+                    </div>
+                    <div id="lista-solicitudes" aria-live="polite">
+                        <p class="aside-vacio">Todavía no registraste ninguna solicitud.</p>
                     </div>
                 </div>
 
-                <!-- ── COLUMNA DERECHA: RESUMEN Y SOLICITUDES ── -->
-                <aside class="gestion-aside" aria-label="Resumen de tu actividad">
+                <div class="aside-card aside-consejos">
+                    <h3>💡 Consejos para adoptar</h3>
+                    <ul class="consejos-lista">
+                        <li>Visitá el catálogo y encontrá la mascota ideal antes de solicitar.</li>
+                        <li>Asegurate de tener tiempo y espacio para una mascota.</li>
+                        <li>Toda la familia debe estar de acuerdo con la adopción.</li>
+                        <li>Considerá los costos veterinarios anuales.</li>
+                        <li>La adopción es un compromiso para toda la vida del animal.</li>
+                    </ul>
+                </div>
 
-                    <!-- Resumen de actividad -->
-                    <div class="aside-card" id="resumen-actividad">
-                        <h3>Tu actividad</h3>
-                        <div class="actividad-grid">
-                            <div class="actividad-item">
-                                <span class="actividad-num" id="resumen-favoritos">0</span>
-                                <span class="actividad-label">Favoritos</span>
-                            </div>
-                            <div class="actividad-item">
-                                <span class="actividad-num" id="resumen-solicitudes">0</span>
-                                <span class="actividad-label">Solicitudes</span>
-                            </div>
-                        </div>
-                        <a href="catalogo.html" class="btn-ver-catalogo">Ver catálogo →</a>
-                    </div>
+            </aside>
+        </div>
+    </section>
 
-                    <!-- Lista de solicitudes enviadas -->
-                    <div class="aside-card">
-                        <div class="aside-card-header">
-                            <h3>Solicitudes enviadas</h3>
-                        </div>
-                        <div id="lista-solicitudes" aria-live="polite">
-                            <p class="aside-vacio">Todavía no enviaste ninguna solicitud.</p>
-                        </div>
-                    </div>
+</main>
 
-                    <!-- Consejos -->
-                    <div class="aside-card aside-consejos">
-                        <h3> Consejos para adoptar</h3>
-                        <ul class="consejos-lista">
-                            <li>Asegurate de tener tiempo y espacio para una mascota.</li>
-                            <li>Visitá el albergue antes de decidir.</li>
-                            <li>Considerá los costos veterinarios anuales.</li>
-                            <li>Toda la familia debe estar de acuerdo.</li>
-                            <li>La adopción es para toda la vida del animal.</li>
-                        </ul>
-                    </div>
-
-                </aside>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN -->
-    <div id="modal-eliminar" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="eliminar-titulo" hidden>
-        <div class="modal-caja modal-caja-pequeña">
-            <h2 id="eliminar-titulo"> Eliminar perfil</h2>
-            <p>¿Estás seguro/a de que querés eliminar tu perfil? Esta acción no se puede deshacer.</p>
-            <div class="modal-acciones-elim">
-                <button id="btn-confirmar-eliminar" class="btn-eliminar-confirm">Sí, eliminar</button>
-                <button id="btn-cancelar-eliminar" class="btn-cancelar-elim">Cancelar</button>
-            </div>
+<!-- MODAL VER DETALLE -->
+<div id="modal-detalle" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="detalle-titulo" hidden>
+    <div class="modal-caja">
+        <button class="modal-cerrar" id="cerrar-detalle" aria-label="Cerrar">✕</button>
+        <div class="modal-encabezado">
+            <span aria-hidden="true">📋</span>
+            <h2 id="detalle-titulo">Detalle de solicitud</h2>
+        </div>
+        <div id="detalle-contenido" class="detalle-contenido"></div>
+        <div style="margin-top:var(--md);display:flex;gap:var(--sm);">
+            <button class="btn-primary" id="btn-editar-desde-detalle">✏️ Editar solicitud</button>
+            <button class="btn-secundario" id="cerrar-detalle-btn">Cerrar</button>
         </div>
     </div>
+</div>
 
-    <!-- FOOTER -->
-    <footer id="contacto">
-        <div class="container footer-content">
-            <div class="footer-marca">
-                <p class="footer-logo"><span aria-hidden="true">🐾</span> Patitas CR</p>
-                <p>Conectando animales con familias responsables en Costa Rica.</p>
-            </div>
-            <nav class="footer-nav" aria-label="Navegación del pie de página">
-                <h5>Navegación</h5>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="catalogo.html">Catálogo de mascotas</a></li>
-                    <li><a href="registro.html">Mi perfil</a></li>
-                </ul>
-            </nav>
-            <address class="footer-contacto">
-                <h5>Contacto</h5>
-                Patitas Costa Rica<br>
-                <a href="mailto:info@patitascr.org">info@patitascr.org</a><br>
-                Alajuela, Costa Rica
-            </address>
+<!-- MODAL CONFIRMAR ELIMINAR -->
+<div id="modal-eliminar" class="modal-overlay" role="dialog" aria-modal="true" hidden>
+    <div class="modal-caja modal-caja-sm">
+        <h2>⚠️ Confirmar eliminación</h2>
+        <p id="msg-eliminar" style="color:var(--texto-suave);margin:var(--sm) 0 var(--md);"></p>
+        <div class="modal-acciones-elim">
+            <button id="btn-confirmar-eliminar" class="btn-eliminar-confirm">Sí, eliminar</button>
+            <button id="btn-cancelar-eliminar" class="btn-cancelar-elim">Cancelar</button>
         </div>
-        <div class="footer-bottom">
-            <small>© 2026 Patitas CR · Desarrollo académico – UTN · Todos los derechos reservados.</small>
+    </div>
+</div>
+
+<footer id="contacto">
+    <div class="container footer-content">
+        <div class="footer-marca">
+            <p class="footer-logo">🐾 Patitas CR</p>
+            <p>Conectando animales con familias responsables en Costa Rica.</p>
         </div>
-    </footer>
+        <nav class="footer-nav" aria-label="Pie de página">
+            <h5>Navegación</h5>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catálogo de mascotas</a></li>
+                <li><a href="gestion.html">Solicitudes</a></li>
+            </ul>
+        </nav>
+        <address class="footer-contacto">
+            <h5>Contacto</h5>
+            Patitas Costa Rica<br>
+            <a href="mailto:info@patitascr.org">info@patitascr.org</a><br>
+            Alajuela, Costa Rica
+        </address>
+    </div>
+    <div class="footer-bottom">
+        <small>© 2026 Patitas CR · Desarrollo académico – UTN · Todos los derechos reservados.</small>
+    </div>
+</footer>
 
-    <script src="js/gestion.js"></script>
-
+<script src="js/gestion.js"></script>
 </body>
 </html>
