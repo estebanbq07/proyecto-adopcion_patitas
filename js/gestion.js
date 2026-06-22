@@ -34,18 +34,19 @@ const errorPersonas = document.querySelector('#error-personas');
 const errorMotivo = document.querySelector('#error-motivo');
 
 const FALLBACK_MASCOTAS_GESTION = [
-  {
-    "id": 1,
-    "nombre": "Max",
-    "especie": "Perro",
-    "edad": "Cachorro",
-    "sexo": "Macho",
-    "tamaño": "Mediano",
-    "temperamento": "Activo",
-    "estado": "Disponible",
-    "descripcion": "Juguetón, cariñoso y listo para acompañarte en sus primeras aventuras.",
-    "foto": "images/mascotas/max.jpg"
-  },
+    {
+        "id": 1,
+        "nombre": "Max",
+        "especie": "Perro",
+        "raza": "Mestizo",
+        "edad": "Cachorro",
+        "tamaño": "Mediano",
+        "estado": "Disponible",
+        "descripcion": "Juguetón, cariñoso y listo para acompañarte en sus primeras aventuras.",
+        "foto": "images/mascotas/max.jpg",
+        "imagen": "images/mascotas/max.jpg",
+        "genero": "macho"
+    },
   {
     "id": 2,
     "nombre": "Luna",
@@ -635,17 +636,18 @@ async function cargarJSONConFallback(url, fallback) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`No se pudo cargar: ${url}`);
+            throw new Error(`HTTP error: ${response.status}`);
         }
-        return await response.json();
+        const datos = await response.json();
+        return Array.isArray(datos) ? datos : [];
     } catch (error) {
-        console.warn(`Fetch falló para ${url}, usando datos de respaldo.`, error);
-        return fallback;
+        console.warn('fetch falló, usando datos de respaldo:', error.message || error);
+        return Array.isArray(fallback) ? fallback : [];
     }
 }
 
 async function cargarMascotasParaComentarios() {
-    mascotasParaComentarios = await cargarJSONConFallback('data/mascotas.json', FALLBACK_MASCOTAS_GESTION);
+    mascotasParaComentarios = await cargarJSONConFallback('./data/mascotas.json', FALLBACK_MASCOTAS_GESTION);
     poblarMascotaSelect();
 }
 

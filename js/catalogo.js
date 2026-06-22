@@ -1,148 +1,160 @@
 const FALLBACK_MASCOTAS_CATALOGO = [
-  {
-    "id": 1,
-    "nombre": "Max",
-    "especie": "Perro",
-    "edad": "Cachorro",
-    "sexo": "Macho",
-    "tamaño": "Mediano",
-    "temperamento": "Activo",
-    "estado": "Disponible",
-    "descripcion": "Juguetón, cariñoso y listo para acompañarte en sus primeras aventuras.",
-    "foto": "images/mascotas/max.jpg"
-  },
-  {
-    "id": 2,
-    "nombre": "Luna",
-    "especie": "Gato",
-    "edad": "Adulto",
-    "sexo": "Hembra",
-    "tamaño": "Pequeño",
-    "temperamento": "Tranquilo",
-    "estado": "Urgente",
-    "descripcion": "Luna disfruta del sol, los mimos y los rincones cálidos del hogar.",
-    "foto": "images/mascotas/luna.jpg"
-  },
-  {
-    "id": 3,
-    "nombre": "Bruno",
-    "especie": "Perro",
-    "edad": "Joven",
-    "sexo": "Macho",
-    "tamaño": "Grande",
-    "temperamento": "Amigable",
-    "estado": "Reservado",
-    "descripcion": "Gran compañero para familias activas que disfruten paseos largos.",
-    "foto": "images/mascotas/bruno.jpg"
-  },
-  {
-    "id": 4,
-    "nombre": "Mía",
-    "especie": "Gato",
-    "edad": "Cachorro",
-    "sexo": "Hembra",
-    "tamaño": "Pequeño",
-    "temperamento": "Juguetón",
-    "estado": "Disponible",
-    "descripcion": "Curiosa y dulce, Mía se adapta rápido y ama saltar por los muebles.",
-    "foto": "images/mascotas/mia.jpg"
-  },
-  {
-    "id": 5,
-    "nombre": "Toby",
-    "especie": "Perro",
-    "edad": "Adulto",
-    "sexo": "Macho",
-    "tamaño": "Mediano",
-    "temperamento": "Independiente",
-    "estado": "Disponible",
-    "descripcion": "Aprecio por los momentos tranquilos y un gran amigo para hogares serenos.",
-    "foto": "images/mascotas/toby.jpg"
-  },
-  {
-    "id": 6,
-    "nombre": "Kiara",
-    "especie": "Gato",
-    "edad": "Joven",
-    "sexo": "Hembra",
-    "tamaño": "Pequeño",
-    "temperamento": "Amigable",
-    "estado": "Disponible",
-    "descripcion": "Kiara adora jugar con ovillos y disfrutar la compañía de personas amables.",
-    "foto": "images/mascotas/kiara.jpg"
-  },
-  {
-    "id": 7,
-    "nombre": "Rocky",
-    "especie": "Perro",
-    "edad": "Adulto",
-    "sexo": "Macho",
-    "tamaño": "Grande",
-    "temperamento": "Activo",
-    "estado": "Urgente",
-    "descripcion": "Necesita espacio y cariño; ideal para quien le dedique tiempo y paseos.",
-    "foto": "images/mascotas/rocky.jpg"
-  },
-  {
-    "id": 8,
-    "nombre": "Nala",
-    "especie": "Gato",
-    "edad": "Adulto",
-    "sexo": "Hembra",
-    "tamaño": "Mediano",
-    "temperamento": "Tranquilo",
-    "estado": "Reservado",
-    "descripcion": "Nala es independiente, suave y necesita un hogar con paciencia y amor.",
-    "foto": "images/mascotas/nala.jpg"
-  },
-  {
-    "id": 9,
-    "nombre": "Bella",
-    "especie": "Perro",
-    "edad": "Cachorro",
-    "sexo": "Hembra",
-    "tamaño": "Pequeño",
-    "temperamento": "Juguetón",
-    "estado": "Disponible",
-    "descripcion": "Bella es dulce, llena de energía y perfecta para una familia con niños.",
-    "foto": "images/mascotas/bella.jpg"
-  },
-  {
-    "id": 10,
-    "nombre": "Simba",
-    "especie": "Gato",
-    "edad": "Joven",
-    "sexo": "Macho",
-    "tamaño": "Mediano",
-    "temperamento": "Activo",
-    "estado": "Disponible",
-    "descripcion": "Simba es curioso, cariñoso y disfruta explorar cada rincón de la casa.",
-    "foto": "images/mascotas/simba.jpg"
-  },
-  {
-    "id": 11,
-    "nombre": "Coco",
-    "especie": "Perro",
-    "edad": "Adulto",
-    "sexo": "Macho",
-    "tamaño": "Grande",
-    "temperamento": "Amigable",
-    "estado": "Reservado",
-    "descripcion": "Coco se lleva bien con personas y otros animales, ideal para un hogar activo.",
-    "foto": "images/mascotas/coco.jpg"
-  },
-  {
-    "id": 12,
-    "nombre": "Milo",
-    "especie": "Gato",
-    "edad": "Cachorro",
-    "sexo": "Macho",
-    "tamaño": "Pequeño",
-    "temperamento": "Juguetón",
-    "estado": "Urgente",
-    "descripcion": "Milo es enérgico, curioso y listo para dar amor a su nuevo hogar.",
-    "foto": "images/mascotas/milo.jpg"
-  }
+    {
+        "id": 1,
+        "nombre": "Max",
+        "especie": "Perro",
+        "raza": "Mestizo",
+        "edad": "Cachorro",
+        "tamaño": "Mediano",
+        "estado": "Disponible",
+        "descripcion": "Juguetón, cariñoso y listo para acompañarte en sus primeras aventuras.",
+        "foto": "images/mascotas/max.jpg",
+        "imagen": "images/mascotas/max.jpg",
+        "genero": "macho"
+    },
+    {
+        "id": 2,
+        "nombre": "Luna",
+        "especie": "Gato",
+        "raza": "Europeo",
+        "edad": "Adulto",
+        "tamaño": "Pequeño",
+        "estado": "Urgente",
+        "descripcion": "Luna disfruta del sol, los mimos y los rincones cálidos del hogar.",
+        "foto": "images/mascotas/luna.jpg",
+        "imagen": "images/mascotas/luna.jpg",
+        "genero": "hembra"
+    },
+    {
+        "id": 3,
+        "nombre": "Bruno",
+        "especie": "Perro",
+        "raza": "Labrador",
+        "edad": "Joven",
+        "tamaño": "Grande",
+        "estado": "Reservado",
+        "descripcion": "Gran compañero para familias activas que disfruten paseos largos.",
+        "foto": "images/mascotas/bruno.jpg",
+        "imagen": "images/mascotas/bruno.jpg",
+        "genero": "macho"
+    },
+    {
+        "id": 4,
+        "nombre": "Mía",
+        "especie": "Gato",
+        "raza": "Siamés",
+        "edad": "Cachorro",
+        "tamaño": "Pequeño",
+        "estado": "Disponible",
+        "descripcion": "Curiosa y dulce, Mía se adapta rápido y ama saltar por los muebles.",
+        "foto": "images/mascotas/mia.jpg",
+        "imagen": "images/mascotas/mia.jpg",
+        "genero": "hembra"
+    },
+    {
+        "id": 5,
+        "nombre": "Toby",
+        "especie": "Perro",
+        "raza": "Beagle",
+        "edad": "Adulto",
+        "tamaño": "Mediano",
+        "estado": "Disponible",
+        "descripcion": "Aprecio por los momentos tranquilos y un gran amigo para hogares serenos.",
+        "foto": "images/mascotas/toby.jpg",
+        "imagen": "images/mascotas/toby.jpg",
+        "genero": "macho"
+    },
+    {
+        "id": 6,
+        "nombre": "Kiara",
+        "especie": "Gato",
+        "raza": "Mestizo",
+        "edad": "Joven",
+        "tamaño": "Pequeño",
+        "estado": "Disponible",
+        "descripcion": "Kiara adora jugar con ovillos y disfrutar la compañía de personas amables.",
+        "foto": "images/mascotas/kiara.jpg",
+        "imagen": "images/mascotas/kiara.jpg",
+        "genero": "hembra"
+    },
+    {
+        "id": 7,
+        "nombre": "Rocky",
+        "especie": "Perro",
+        "raza": "Pastor",
+        "edad": "Adulto",
+        "tamaño": "Grande",
+        "estado": "Urgente",
+        "descripcion": "Necesita espacio y cariño; ideal para quien le dedique tiempo y paseos.",
+        "foto": "images/mascotas/rocky.jpg",
+        "imagen": "images/mascotas/rocky.jpg",
+        "genero": "macho"
+    },
+    {
+        "id": 8,
+        "nombre": "Nala",
+        "especie": "Gato",
+        "raza": "Europeo",
+        "edad": "Adulto",
+        "tamaño": "Mediano",
+        "estado": "Reservado",
+        "descripcion": "Nala es independiente, suave y necesita un hogar con paciencia y amor.",
+        "foto": "images/mascotas/nala.jpg",
+        "imagen": "images/mascotas/nala.jpg",
+        "genero": "hembra"
+    },
+    {
+        "id": 9,
+        "nombre": "Bella",
+        "especie": "Perro",
+        "raza": "Pomerania",
+        "edad": "Cachorro",
+        "tamaño": "Pequeño",
+        "estado": "Disponible",
+        "descripcion": "Bella es dulce, llena de energía y perfecta para una familia con niños.",
+        "foto": "images/mascotas/bella.jpg",
+        "imagen": "images/mascotas/bella.jpg",
+        "genero": "hembra"
+    },
+    {
+        "id": 10,
+        "nombre": "Simba",
+        "especie": "Gato",
+        "raza": "Mestizo",
+        "edad": "Joven",
+        "tamaño": "Mediano",
+        "estado": "Disponible",
+        "descripcion": "Simba es curioso, cariñoso y disfruta explorar cada rincón de la casa.",
+        "foto": "images/mascotas/simba.jpg",
+        "imagen": "images/mascotas/simba.jpg",
+        "genero": "macho"
+    },
+    {
+        "id": 11,
+        "nombre": "Coco",
+        "especie": "Perro",
+        "raza": "Golden",
+        "edad": "Adulto",
+        "tamaño": "Grande",
+        "estado": "Reservado",
+        "descripcion": "Coco se lleva bien con personas y otros animales, ideal para un hogar activo.",
+        "foto": "images/mascotas/coco.jpg",
+        "imagen": "images/mascotas/coco.jpg",
+        "genero": "macho"
+    },
+    {
+        "id": 12,
+        "nombre": "Milo",
+        "especie": "Gato",
+        "raza": "Mestizo",
+        "edad": "Cachorro",
+        "tamaño": "Pequeño",
+        "estado": "Urgente",
+        "descripcion": "Milo es enérgico, curioso y listo para dar amor a su nuevo hogar.",
+        "foto": "images/mascotas/milo.jpg",
+        "imagen": "images/mascotas/milo.jpg",
+        "genero": "macho"
+    }
 ];
 
 let mascotasCatalogo = [];
@@ -197,22 +209,23 @@ async function cargarJSONConFallback(url, fallback) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`No se pudo cargar: ${url}`);
+            throw new Error(`HTTP error: ${response.status}`);
         }
-        return await response.json();
+        const datos = await response.json();
+        return Array.isArray(datos) ? datos : [];
     } catch (error) {
-        console.warn(`Fetch falló para ${url}, usando datos de respaldo.`, error);
-        return fallback;
+        console.warn('fetch falló, usando datos de respaldo:', error.message || error);
+        return Array.isArray(fallback) ? fallback : [];
     }
 }
 
 async function cargarMascotas() {
-    mascotasCatalogo = await cargarJSONConFallback('data/mascotas.json', FALLBACK_MASCOTAS_CATALOGO);
+    mascotasCatalogo = await cargarJSONConFallback('./data/mascotas.json', FALLBACK_MASCOTAS_CATALOGO);
     renderizarMascotas(mascotasCatalogo);
 }
 
 async function cargarHistoriasAdoptadas() {
-    const historias = await cargarJSONConFallback('data/historias.json', FALLBACK_HISTORIAS_CATALOGO);
+    const historias = await cargarJSONConFallback('./data/historias.json', FALLBACK_HISTORIAS_CATALOGO);
     adoptados = new Set(historias.map((historia) => historia.mascota.toLowerCase()));
 }
 
