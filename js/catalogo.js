@@ -104,7 +104,7 @@ function renderizar() {
                 data-id="${m.id}"
                 aria-label="${esFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}: ${m.nombre}"
                 aria-pressed="${esFav}">
-                ${esFav ? 'Favorito' : 'Marcar favorito'}
+                ${esFav ? '❤️' : '🤍'}
             </button>
 
             <img class="mascota-img" src="${m.imagen}"

@@ -213,11 +213,12 @@ p:last-child { margin-bottom:0; }
 
 .badge-urgente { position:absolute; top:12px; left:12px; background:#DC2626; color:white; font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:var(--r-pill); z-index:2; }
 
-.btn-favorito { position:absolute; top:10px; right:10px; background:white; border:none; border-radius:50%; width:38px; height:38px; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:var(--sombra-sm); transition:transform .15s; z-index:2; }
-.btn-favorito:hover { transform:scale(1.15); }
-.btn-favorito.es-favorito { background:#FFF0E8; }
+.btn-favorito { position:absolute; top:12px; right:12px; background:none; border:none; font-size:2.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .15s,filter .15s; z-index:2; padding:0; width:auto; height:auto; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+.btn-favorito:hover { transform:scale(1.2); filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
+.btn-favorito:active { transform:scale(0.95); }
 
-.mascota-img { width:100%; height:200px; object-fit:cover; background:var(--crema-oscuro); display:block; }
+.mascota-img { width:100%; height:280px; object-fit:cover; background:var(--crema-oscuro); display:block; transition:transform .3s ease; }
+.mascota-card:hover .mascota-img { transform:scale(1.08); }
 .mascota-body { padding:var(--sm); display:flex; flex-direction:column; flex:1; gap:10px; }
 
 .mascota-tags { display:flex; gap:6px; flex-wrap:wrap; }
