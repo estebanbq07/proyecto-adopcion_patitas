@@ -321,12 +321,12 @@ p:last-child { margin-bottom:0; }
 
 .aside-vacio { color:var(--texto-suave); font-size:.88rem; font-style:italic; text-align:center; padding:var(--sm) 0; }
 
-.solicitud-item { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid var(--crema-oscuro); }
+.solicitud-item { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid var(--crema-oscuro); }
 .solicitud-item:last-child { border-bottom:none; padding-bottom:0; }
-.solicitud-info { flex:1; min-width:0; }
-.solicitud-nombre { font-weight:700; font-size:.9rem; color:var(--azul); display:block; margin-bottom:2px; }
-.solicitud-mascota { font-size:.82rem; color:var(--naranja-hover); font-weight:600; display:block; }
-.solicitud-fecha { font-size:.78rem; color:var(--texto-suave); }
+.solicitud-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
+.solicitud-nombre { font-weight:700; font-size:1rem; color:var(--azul); display:block; margin-bottom:6px; }
+.solicitud-mascota { font-size:.88rem; color:var(--naranja-hover); font-weight:600; display:block; }
+.solicitud-fecha { font-size:.8rem; color:var(--texto-suave); }
 .btn-eliminar-sol { background:none; border:none; cursor:pointer; font-size:1rem; padding:4px; border-radius:4px; color:var(--texto-suave); transition:color .2s; }
 .btn-eliminar-sol:hover { color:#DC2626; }
 
@@ -431,15 +431,23 @@ footer { background:#0F2347; color:var(--crema); padding:var(--lg) 0 0; }
 .aviso-mascota button:hover { background:rgba(244,132,95,.2); }
 
 /* ── ACCIONES EN CADA SOLICITUD ─────────────────── */
-.sol-acciones { display:flex; gap:6px; flex-shrink:0; }
+.sol-acciones { display:flex; gap:10px; flex-shrink:0; align-items:center; }
 .btn-sol-accion {
-    background:none; border:1.5px solid var(--borde); border-radius:var(--r-sm);
-    width:32px; height:32px; cursor:pointer; font-size:.9rem;
-    display:flex; align-items:center; justify-content:center;
-    transition:border-color .2s, background .2s;
+    background:none; border:1.5px solid var(--borde); border-radius:10px;
+    min-width:64px; height:36px; cursor:pointer; font-size:.92rem; padding:0 10px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    color:var(--azul); font-weight:700;
+    transition:transform .12s ease, border-color .2s, background .2s;
 }
-.btn-sol-accion:hover { border-color:var(--naranja); background:#FFF0E8; }
+.btn-sol-accion:hover { transform:translateY(-2px); border-color:var(--naranja); background:#FFF0E8; }
 .btn-sol-accion.btn-elim:hover { border-color:#DC2626; background:#FFF5F5; }
+
+/* Ajustes para pantallas pequeñas: apilar y hacer botones más fáciles de tocar */
+@media (max-width:700px) {
+    .solicitud-item { flex-direction:column; gap:8px; padding:12px 0; }
+    .sol-acciones { width:100%; justify-content:flex-start; gap:8px; }
+    .btn-sol-accion { min-width:48px; height:36px; padding:6px 10px; font-size:.9rem; }
+}
 
 /* Badge "editando" en la lista */
 .badge-editando {
