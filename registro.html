@@ -44,7 +44,7 @@
         </div>
     </section>
 
-    <div class="paw-divider" aria-hidden="true"><span>🐾</span><span>🐾</span><span>🐾</span></div>
+    <div class="paw-divider" aria-hidden="true"></div>
 
     <section class="gestion-layout-section">
         <div class="container gestion-layout">
@@ -61,9 +61,9 @@
 
                     <!-- Aviso de mascota preseleccionada desde catálogo -->
                     <div id="aviso-mascota" class="aviso-mascota" hidden>
-                        <span aria-hidden="true">🐾</span>
+                        <span aria-hidden="true"></span>
                         <span id="aviso-mascota-texto">Vas a solicitar la adopción de <strong id="aviso-nombre"></strong></span>
-                        <button id="btn-quitar-mascota" aria-label="Quitar mascota preseleccionada">✕</button>
+                        <button id="btn-quitar-mascota" aria-label="Quitar mascota preseleccionada">×</button>
                     </div>
 
                     <form id="form-solicitud" novalidate>
@@ -148,7 +148,7 @@
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sm);padding-bottom:10px;border-bottom:1.5px solid var(--crema-oscuro);">
                         <h3 style="margin:0;border:none;padding:0;">Solicitudes registradas</h3>
                         <button id="btn-limpiar-todo" class="btn-eliminar-sol" style="display:none;font-size:.8rem;padding:4px 8px;border-radius:var(--r-sm);border:1.5px solid var(--borde);" title="Eliminar todas">
-                            🗑️ Todas
+                            Eliminar todas
                         </button>
                     </div>
                     <div id="lista-solicitudes" aria-live="polite">
@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="aside-card aside-consejos">
-                    <h3>💡 Consejos para adoptar</h3>
+                    <h3>Consejos para adoptar</h3>
                     <ul class="consejos-lista">
                         <li>Visitá el catálogo y encontrá la mascota ideal antes de solicitar.</li>
                         <li>Asegurate de tener tiempo y espacio para una mascota.</li>
@@ -175,15 +175,15 @@
 
 <!-- MODAL VER DETALLE -->
 <div id="modal-detalle" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="detalle-titulo" hidden>
-    <div class="modal-caja">
-        <button class="modal-cerrar" id="cerrar-detalle" aria-label="Cerrar">✕</button>
+        <div class="modal-caja">
+        <button class="modal-cerrar" id="cerrar-detalle" aria-label="Cerrar">×</button>
         <div class="modal-encabezado">
-            <span aria-hidden="true">📋</span>
+            <span aria-hidden="true"></span>
             <h2 id="detalle-titulo">Detalle de solicitud</h2>
         </div>
         <div id="detalle-contenido" class="detalle-contenido"></div>
-        <div style="margin-top:var(--md);display:flex;gap:var(--sm);">
-            <button class="btn-primary" id="btn-editar-desde-detalle">✏️ Editar solicitud</button>
+            <div style="margin-top:var(--md);display:flex;gap:var(--sm);">
+            <button class="btn-primary" id="btn-editar-desde-detalle">Editar solicitud</button>
             <button class="btn-secundario" id="cerrar-detalle-btn">Cerrar</button>
         </div>
     </div>
@@ -192,7 +192,7 @@
 <!-- MODAL CONFIRMAR ELIMINAR -->
 <div id="modal-eliminar" class="modal-overlay" role="dialog" aria-modal="true" hidden>
     <div class="modal-caja modal-caja-sm">
-        <h2>⚠️ Confirmar eliminación</h2>
+        <h2>Confirmar eliminación</h2>
         <p id="msg-eliminar" style="color:var(--texto-suave);margin:var(--sm) 0 var(--md);"></p>
         <div class="modal-acciones-elim">
             <button id="btn-confirmar-eliminar" class="btn-eliminar-confirm">Sí, eliminar</button>
@@ -204,7 +204,7 @@
 <footer id="contacto">
     <div class="container footer-content">
         <div class="footer-marca">
-            <p class="footer-logo">🐾 Patitas CR</p>
+            <p class="footer-logo">Patitas CR</p>
             <p>Conectando animales con familias responsables en Costa Rica.</p>
         </div>
         <nav class="footer-nav" aria-label="Pie de página">
