@@ -110,7 +110,9 @@ function renderizar() {
             <img class="mascota-img" src="${m.imagen}"
                 alt="Foto de ${m.nombre}, ${m.raza}"
                 onerror="this.style.background='var(--crema-oscuro)';this.removeAttribute('src');"
-                loading="lazy">
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low">
 
             <div class="mascota-body">
                 <div class="mascota-tags">

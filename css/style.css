@@ -187,8 +187,19 @@ p:last-child { margin-bottom:0; }
 .stat-sep { opacity:.4; }
 
 /* ── CONTROLES CATÁLOGO ──────────────────────────── */
-.controles-section { background:var(--blanco); padding:var(--md) 0; border-bottom:1.5px solid var(--borde); position:sticky; top:80px; z-index:100; box-shadow:var(--sombra-sm); }
-.controles-wrapper { display:flex; flex-direction:column; gap:var(--sm); }
+.controles-section {
+    background:var(--blanco);
+    padding:var(--md) 0;
+    border-bottom:1.5px solid var(--borde);
+    position:static;
+    z-index:105;
+    box-shadow:var(--sombra-sm);
+}
+.controles-wrapper {
+    display:flex;
+    flex-direction:column;
+    gap:var(--sm);
+}
 
 .busqueda-wrapper { position:relative; }
 .busqueda-icono { position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:1rem; pointer-events:none; }
