@@ -13,6 +13,7 @@ const btnLimpiar    = document.getElementById('btn-limpiar');
 const statMostrando = document.getElementById('stat-mostrando');
 const statFavoritos = document.getElementById('stat-favoritos');
 const toast         = document.getElementById('toast');
+let listenersAdjuntados = false;
 
 /* ── LOCALSTORAGE ── */
 function cargarLS(clave) {
@@ -75,13 +76,52 @@ function filtrar() {
 }
 
 /* ── RENDERIZAR ── */
+function actualizarEstadoFavorito(card, mascota) {
+    const button = card.querySelector('.btn-favorito');
+    if (!button) return;
+
+    const esFav = favoritos.includes(mascota.id);
+    button.classList.toggle('es-favorito', esFav);
+    button.setAttribute('aria-pressed', String(esFav));
+    button.setAttribute('aria-label', `${esFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}: ${mascota.nombre}`);
+    button.innerHTML = esFav ? '❤️' : '🤍';
+}
+
+function crearSkeletonLoader() {
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    const frag = document.createDocumentFragment();
+
+    for (let i = 0; i < 6; i++) {
+        const card = document.createElement('article');
+        card.className = 'mascota-card skeleton-card';
+        card.setAttribute('aria-hidden', 'true');
+        card.innerHTML = `
+            <div class="skeleton-media"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-line skeleton-line-short"></div>
+                <div class="skeleton-line skeleton-line-medium"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line skeleton-line-short"></div>
+            </div>`;
+        frag.appendChild(card);
+    }
+
+    grid.appendChild(frag);
+}
+
 function renderizar() {
     const lista = filtrar();
     statMostrando.textContent = `Mostrando ${lista.length} de ${todasLasMascotas.length} mascotas`;
     statFavoritos.textContent = `${favoritos.length} favorito${favoritos.length !== 1 ? 's' : ''}`;
 
+    const vacioActual = grid.querySelector('.estado-vacio');
+    if (vacioActual) vacioActual.remove();
+
     if (lista.length === 0) {
-        grid.innerHTML = `
+        grid.querySelectorAll('.mascota-card').forEach(card => card.remove());
+        grid.innerHTML += `
             <div class="estado-vacio" style="grid-column:1/-1">
                 <span class="estado-vacio-icono"></span>
                 <h3>No encontramos mascotas</h3>
@@ -90,11 +130,31 @@ function renderizar() {
         return;
     }
 
+    const cardsActuales = Array.from(grid.querySelectorAll('.mascota-card'));
+    const idsActuales = new Set(cardsActuales.map(card => Number(card.dataset.id)));
+    const idsNuevos = new Set(lista.map(m => m.id));
+
+    cardsActuales.forEach(card => {
+        const idCard = Number(card.dataset.id);
+        if (!idsNuevos.has(idCard)) {
+            card.remove();
+        }
+    });
+
+    const cardsRestantes = new Map(Array.from(grid.querySelectorAll('.mascota-card')).map(card => [Number(card.dataset.id), card]));
     const frag = document.createDocumentFragment();
+
     lista.forEach(m => {
+        const cardExistente = cardsRestantes.get(m.id);
+        if (cardExistente) {
+            actualizarEstadoFavorito(cardExistente, m);
+            return;
+        }
+
         const esFav = favoritos.includes(m.id);
         const card  = document.createElement('article');
         card.className = 'mascota-card';
+        card.dataset.id = m.id;
         card.setAttribute('aria-label', `Mascota: ${m.nombre}`);
 
         card.innerHTML = `
@@ -137,26 +197,31 @@ function renderizar() {
         frag.appendChild(card);
     });
 
-    grid.innerHTML = '';
-    grid.appendChild(frag);
+    if (frag.childNodes.length) {
+        grid.appendChild(frag);
+    }
+
     adjuntarEventos();
 }
 
 function adjuntarEventos() {
-    // Favoritos
-    grid.querySelectorAll('.btn-favorito').forEach(btn => {
-        btn.addEventListener('click', () => toggleFavorito(parseInt(btn.dataset.id)));
-    });
+    if (listenersAdjuntados) return;
+    listenersAdjuntados = true;
 
-    // Solicitar adopción → lleva a registro.html con la mascota preseleccionada
-    grid.querySelectorAll('.btn-adoptar').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id     = btn.dataset.id;
-            const nombre = btn.dataset.nombre;
-            // Guardar en localStorage para que gestion.js lo lea
+    grid.addEventListener('click', (event) => {
+        const btnFav = event.target.closest('.btn-favorito');
+        if (btnFav) {
+            toggleFavorito(parseInt(btnFav.dataset.id, 10));
+            return;
+        }
+
+        const btnAdoptar = event.target.closest('.btn-adoptar');
+        if (btnAdoptar) {
+            const id     = btnAdoptar.dataset.id;
+            const nombre = btnAdoptar.dataset.nombre;
             localStorage.setItem('patitas_mascota_seleccionada', JSON.stringify({ id, nombre }));
             window.location.href = 'registro.html';
-        });
+        }
     });
 }
 
@@ -202,6 +267,7 @@ btnLimpiar.addEventListener('click', () => {
 /* ── INICIO ── */
 async function inicializar() {
     favoritos        = cargarLS('patitas_favoritos');
+    crearSkeletonLoader();
     todasLasMascotas = await cargarMascotas();
 
     if (todasLasMascotas.length === 0) {

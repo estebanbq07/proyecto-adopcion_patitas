@@ -222,14 +222,32 @@ p:last-child { margin-bottom:0; }
 .mascota-card { background:var(--blanco); border:1.5px solid var(--borde); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sombra-sm); transition:transform .2s,box-shadow .2s; display:flex; flex-direction:column; position:relative; }
 .mascota-card:hover { transform:translateY(-4px); box-shadow:var(--sombra-md); }
 
+.skeleton-card { min-height:420px; pointer-events:none; }
+.skeleton-media {
+    width:100%; height:220px; background:linear-gradient(90deg, var(--crema-oscuro) 25%, #efe4d0 50%, var(--crema-oscuro) 75%);
+    background-size:200% 100%; animation:shimmer 1.2s infinite linear;
+}
+.skeleton-body { padding:var(--sm); display:flex; flex-direction:column; gap:10px; }
+.skeleton-line {
+    height:12px; border-radius:999px; background:linear-gradient(90deg, var(--crema-oscuro) 25%, #efe4d0 50%, var(--crema-oscuro) 75%);
+    background-size:200% 100%; animation:shimmer 1.2s infinite linear;
+}
+.skeleton-line-short { width:45%; }
+.skeleton-line-medium { width:70%; }
+
+@keyframes shimmer {
+    0% { background-position:200% 0; }
+    100% { background-position:-200% 0; }
+}
+
 .badge-urgente { position:absolute; top:12px; left:12px; background:#DC2626; color:white; font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:var(--r-pill); z-index:2; }
 
 .btn-favorito { position:absolute; top:12px; right:12px; background:none; border:none; font-size:2.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .15s,filter .15s; z-index:2; padding:0; width:auto; height:auto; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
 .btn-favorito:hover { transform:scale(1.2); filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
 .btn-favorito:active { transform:scale(0.95); }
 
-.mascota-img { width:100%; height:280px; object-fit:cover; background:var(--crema-oscuro); display:block; transition:transform .3s ease; }
-.mascota-card:hover .mascota-img { transform:scale(1.08); }
+.mascota-img { width:100%; height:220px; object-fit:contain; background:var(--crema-oscuro); display:block; transition:transform .3s ease; }
+.mascota-card:hover .mascota-img { transform:scale(1.04); }
 .mascota-body { padding:var(--sm); display:flex; flex-direction:column; flex:1; gap:10px; }
 
 .mascota-tags { display:flex; gap:6px; flex-wrap:wrap; }
