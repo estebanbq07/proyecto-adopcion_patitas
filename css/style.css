@@ -137,7 +137,7 @@ p:last-child { margin-bottom:0; }
 .hero-actions { display:flex; align-items:center; gap:var(--md); flex-wrap:wrap; }
 
 .hero-image { flex:0 0 420px; background:var(--blanco); padding:14px; border-radius:var(--r-lg); box-shadow:var(--sombra-lg); border:2px solid var(--borde); }
-.hero-image img { width:100%; border-radius:var(--r-md); object-fit:cover; aspect-ratio:4/3; background:var(--crema-oscuro); }
+.hero-image img { width:100%; height:100%; min-height:280px; border-radius:var(--r-md); object-fit:cover; background:var(--crema-oscuro); }
 .hero-image figcaption { margin-top:10px; font-size:.85rem; color:var(--texto-suave); text-align:center; font-style:italic; }
 
 /* ── SECCIONES INDEX ─────────────────────────────── */
@@ -246,7 +246,7 @@ p:last-child { margin-bottom:0; }
 .btn-favorito:hover { transform:scale(1.2); filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
 .btn-favorito:active { transform:scale(0.95); }
 
-.mascota-img { width:100%; height:220px; object-fit:contain; background:var(--crema-oscuro); display:block; transition:transform .3s ease; }
+.mascota-img { width:100%; height:220px; object-fit:cover; background:var(--crema-oscuro); display:block; transition:transform .3s ease; }
 .mascota-card:hover .mascota-img { transform:scale(1.04); }
 .mascota-body { padding:var(--sm); display:flex; flex-direction:column; flex:1; gap:10px; }
 
