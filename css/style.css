@@ -321,10 +321,13 @@ p:last-child { margin-bottom:0; }
 .form-mensaje[hidden] { display:none; }
 .form-mensaje.mensaje-exito { background:#ECFDF5; color:#065F46; border:1.5px solid var(--verde); }
 .form-mensaje.mensaje-error { background:#FFF5F5; color:#991B1B; border:1.5px solid #DC2626; }
-
-.form-acciones { display:flex; gap:var(--sm); align-items:center; flex-wrap:wrap; padding-top:var(--sm); border-top:1.5px solid var(--borde); }
-.btn-submit { border:none; cursor:pointer; font-family:var(--f-cuerpo); font-size:1rem; }
-
+.form-mensaje.mensaje-warning {
+    background:#FFF7E6;
+    color:#9A2C00;
+    border:1.5px solid #F59E0B;
+    border-left:5px solid #F59E0B;
+    box-shadow:0 2px 8px rgba(245,158,11,.16);
+}
 /* ── ASIDE GESTIÓN ───────────────────────────────── */
 .gestion-aside { display:flex; flex-direction:column; gap:var(--md); position:sticky; top:100px; }
 .aside-card { background:var(--blanco); border:1.5px solid var(--borde); border-radius:var(--r-lg); padding:var(--md); }

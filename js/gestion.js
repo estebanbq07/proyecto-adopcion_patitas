@@ -5,6 +5,7 @@ let favoritos       = [];
 let modoEdicion     = null;   // null = nueva solicitud | id = editando
 let pendienteElim   = null;   // id a eliminar (null = eliminar todas)
 let solicitudDetalle = null;  // solicitud abierta en modal detalle
+let mensajeTimer    = null;
 
 /* ── ELEMENTOS DOM ── */
 const formSolicitud     = document.getElementById('form-solicitud');
@@ -121,7 +122,18 @@ function mostrarMensaje(texto, tipo) {
     formMensaje.className   = `form-mensaje mensaje-${tipo}`;
     formMensaje.hidden      = false;
     formMensaje.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    if (tipo === 'exito') setTimeout(() => { formMensaje.hidden = true; }, 5000);
+
+    if (mensajeTimer) clearTimeout(mensajeTimer);
+
+    if (tipo === 'exito') {
+        mensajeTimer = setTimeout(() => { formMensaje.hidden = true; }, 5000);
+    } else if (tipo === 'warning') {
+        mensajeTimer = setTimeout(() => { formMensaje.hidden = true; }, 3500);
+    }
+}
+
+function mostrarAdvertencia(texto) {
+    mostrarMensaje(texto, 'warning');
 }
 
 /* ── LIMPIAR FORMULARIO ── */
@@ -270,6 +282,7 @@ function cerrarModalEliminar() {
 document.getElementById('btn-cancelar-eliminar')?.addEventListener('click', cerrarModalEliminar);
 
 document.getElementById('btn-confirmar-eliminar')?.addEventListener('click', () => {
+    formMensaje.hidden = true;
     if (pendienteElim === 'todas') {
         solicitudes = [];
     } else {
@@ -283,6 +296,7 @@ document.getElementById('btn-confirmar-eliminar')?.addEventListener('click', () 
 });
 
 btnLimpiarTodo?.addEventListener('click', () => {
+    mostrarAdvertencia('⚠️ Vas a eliminar todas las solicitudes. Confirmá para continuar.');
     abrirModalEliminar('todas', '¿Seguro/a que querés eliminar todas las solicitudes? Esta acción no se puede deshacer.');
 });
 
@@ -333,7 +347,10 @@ function renderizarLista() {
     listaSolicitudes.querySelectorAll('.btn-elim').forEach(btn => {
         btn.addEventListener('click', () => {
             const sol = solicitudes.find(s => s.id === parseInt(btn.dataset.id));
-            if (sol) abrirModalEliminar(sol.id, `¿Eliminás la solicitud para ${sol.mascota} de ${sol.nombre}?`);
+            if (sol) {
+                mostrarAdvertencia(`⚠️ Vas a eliminar la solicitud de ${sol.mascota}. Confirmá para continuar.`);
+                abrirModalEliminar(sol.id, `¿Eliminás la solicitud para ${sol.mascota} de ${sol.nombre}?`);
+            }
         });
     });
 }
