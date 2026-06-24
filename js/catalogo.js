@@ -142,39 +142,44 @@ function renderizar() {
     });
 
     const cardsRestantes = new Map(Array.from(grid.querySelectorAll('.mascota-card')).map(card => [Number(card.dataset.id), card]));
-    const frag = document.createDocumentFragment();
+    grid.style.opacity = '0';
 
-    lista.forEach(m => {
-        const cardExistente = cardsRestantes.get(m.id);
-        if (cardExistente) {
-            actualizarEstadoFavorito(cardExistente, m);
-            return;
-        }
+    requestAnimationFrame(() => {
+        const frag = document.createDocumentFragment();
 
-        const esFav = favoritos.includes(m.id);
-        const card  = document.createElement('article');
-        card.className = 'mascota-card';
-        card.dataset.id = m.id;
-        card.setAttribute('aria-label', `Mascota: ${m.nombre}`);
+        lista.forEach(m => {
+            const cardExistente = cardsRestantes.get(m.id);
+            if (cardExistente) {
+                actualizarEstadoFavorito(cardExistente, m);
+                return;
+            }
 
-        card.innerHTML = `
-            ${m.urgente ? '<span class="badge-urgente">Urgente</span>' : ''}
+            const esFav = favoritos.includes(m.id);
+            const card  = document.createElement('article');
+            card.className = 'mascota-card';
+            card.dataset.id = m.id;
+            card.setAttribute('aria-label', `Mascota: ${m.nombre}`);
 
-            <button class="btn-favorito ${esFav ? 'es-favorito' : ''}"
-                data-id="${m.id}"
-                aria-label="${esFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}: ${m.nombre}"
-                aria-pressed="${esFav}">
-                ${esFav ? '❤️' : '🤍'}
-            </button>
+            card.innerHTML = `
+                ${m.urgente ? '<span class="badge-urgente">Urgente</span>' : ''}
 
-            <img class="mascota-img" src="${m.imagen}"
-                alt="Foto de ${m.nombre}, ${m.raza}"
-                onerror="this.style.background='var(--crema-oscuro)';this.removeAttribute('src');"
-                loading="lazy"
-                decoding="async"
-                fetchpriority="low">
+                <button class="btn-favorito ${esFav ? 'es-favorito' : ''}"
+                    data-id="${m.id}"
+                    aria-label="${esFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}: ${m.nombre}"
+                    aria-pressed="${esFav}">
+                    ${esFav ? '❤️' : '🤍'}
+                </button>
 
-            <div class="mascota-body">
+                <div class="mascota-img-wrapper">
+                    <img class="mascota-img" src="${m.imagen}"
+                        alt="Foto de ${m.nombre}, ${m.raza}"
+                        onerror="this.style.background='var(--crema-oscuro)';this.removeAttribute('src');"
+                        loading="lazy"
+                        decoding="async"
+                        fetchpriority="low">
+                </div>
+
+                <div class="mascota-body">
                 <div class="mascota-tags">
                     <span class="mascota-tag tag-especie">${m.especie}</span>
                     <span class="mascota-tag">${m.tamaño}</span>
@@ -194,14 +199,16 @@ function renderizar() {
                 </button>
             </div>`;
 
-        frag.appendChild(card);
+            frag.appendChild(card);
+        });
+
+        if (frag.childNodes.length) {
+            grid.appendChild(frag);
+        }
+
+        adjuntarEventos();
+        grid.style.opacity = '1';
     });
-
-    if (frag.childNodes.length) {
-        grid.appendChild(frag);
-    }
-
-    adjuntarEventos();
 }
 
 function adjuntarEventos() {
