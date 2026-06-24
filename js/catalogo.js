@@ -146,14 +146,14 @@ function adjuntarEventos() {
         btn.addEventListener('click', () => toggleFavorito(parseInt(btn.dataset.id)));
     });
 
-    // Solicitar adopción → lleva a gestion.html con la mascota preseleccionada
+    // Solicitar adopción → lleva a registro.html con la mascota preseleccionada
     grid.querySelectorAll('.btn-adoptar').forEach(btn => {
         btn.addEventListener('click', () => {
             const id     = btn.dataset.id;
             const nombre = btn.dataset.nombre;
             // Guardar en localStorage para que gestion.js lo lea
             localStorage.setItem('patitas_mascota_seleccionada', JSON.stringify({ id, nombre }));
-            window.location.href = 'gestion.html';
+            window.location.href = 'registro.html';
         });
     });
 }
