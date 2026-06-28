@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <!--el meta charset="UTF-8"> define que se puedan usar tildes y las nn-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Patitas CR conecta animales en adopción con familias responsables en Costa Rica.">
@@ -11,17 +12,19 @@
 </head>
 
 <body>
-
+    <!--LOGO, REFERENCIA AL INICIO Y NOMBRE DE PAGINA-->
     <header class="site-header">
         <div class="container header-content">
             <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
                 <img src="Images/adoptaPatitas/Imagen1.jpg" alt="Patitas CR" class="logo-image">
                 <strong>Patitas CR</strong>
             </a>
+            <!--ESTO FUNCIONA COMO UN CHECKBOX QUE SI ESTA MARCADO MUESTRA EL MENU, ESTO FUNCIONA JUNTO CON EL CSS-->
             <input type="checkbox" id="menu-toggle" class="menu-toggle">
             <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
                 <span></span><span></span><span></span>
             </label>
+            <!--MENU PRINCIPAL CON LOS ENLACES-->
             <nav class="main-nav" aria-label="Navegación principal">
                 <ul>
                     <li><a class="active-link" href="index.html">Inicio</a></li>
@@ -32,22 +35,27 @@
             </nav>
         </div>
     </header>
-
+    <!--MUESTRA DONDE ESTAMOS ES LO DE INICIO/INICIO Y NOS REFIERE A LA PAGINA DE INICIO-->
     <nav class="breadcrumb" aria-label="Ubicación actual">
         <div class="container"><a href="index.html">Inicio</a><span>Inicio</span></div>
     </nav>
 
-    <main>
 
+    <main>
+        <!--SECCIÓN HERO, ES LO PRINCIPAL-->
         <section class="hero" aria-labelledby="hero-titulo">
+            <!--ESTA ES LA DIVISION QUE CONTIENE EL CONTENIDO DEL HERO-->
             <div class="container hero-content">
+                <!--TEXTO DE LA IZQ-->
                 <div class="hero-text">
                     <span class="hero-badge">Adopta, no compres</span>
                     <h1 id="hero-titulo">Cada patita merece<br><em>un hogar con amor</em></h1>
                     <p class="hero-desc">Los albergues de Costa Rica están llenos. Miles de perros y gatos esperan una
                         familia responsable. Acá los conectamos contigo de forma fácil y segura.</p>
 
+                        <!--CONTADOR DE MASCOTAS, ACA ENTRA EL JAVASCRIPT-->
                     <div class="hero-contador" id="contador-mascotas" aria-live="polite">
+                        <!--SEPARACION ENTRE LOS 3 CONTADORES, SI TIENEN UN GUION ES PORQUE AUN EL JS NO HA CARGADO-->
                         <div class="contador-item">
                             <span class="contador-num" id="num-total">–</span>
                             <span class="contador-label">mascotas disponibles</span>
@@ -61,15 +69,18 @@
                             <span class="contador-label">gatos</span>
                         </div>
                     </div>
-
+                    <!--ACA SE AGRUPAN LOS BOTONES DE ACCIÓN-->
                     <div class="hero-actions">
                         <a href="catalogo.html" class="btn-primary">Ver mascotas disponibles</a>
+                        <!--ACA SE UTILIZA EL CSS DENTRO DEL HTML-->
                         <a href="registro.html" class="btn-outline"
                             style="color:var(--azul);border-color:var(--azul);">Registrarse</a>
+                            <!--EL # SE UTILIZA PARA ENLAZAR CON EL ID DE UN ELEMENTO EN LA MISMA PÁGINA-->
                         <a href="#como-funciona" class="btn-link">¿Cómo funciona?</a>
                     </div>
                 </div>
 
+                <!--LA IMAGEN DEL HERO, Y SU DESCRIPCIÓN-->
                 <figure class="hero-image">
                     <img src="Images/adoptaPatitas/Imagen1.jpg"
                         alt="Perro y gato esperando adopción en un albergue de Costa Rica"
@@ -78,14 +89,19 @@
                 </figure>
             </div>
         </section>
-
+    <!--SEPARADOR DE SECCIÓN-->
         <div class="paw-divider" aria-hidden="true"></div>
 
+
+    <!--SECCIÓN CÓMO FUNCIONA-->
         <section id="como-funciona" aria-labelledby="titulo-como">
             <div class="container">
                 <h2 id="titulo-como">¿Cómo funciona Patitas CR?</h2>
                 <p class="seccion-desc">Tres pasos sencillos para encontrar a tu compañero ideal.</p>
+                <!--DIVISION PARA SEPARAR LOS PASOS-->
                 <div class="pasos-grid">
+                    
+                    <!--CADA PASO ES UN ARTÍCULO EN LA GRILLA-->
                     <article class="paso-card">
                         <span class="paso-icono" aria-hidden="true"></span>
                         <h3>1. Explorá el catálogo</h3>
@@ -109,12 +125,15 @@
 
         <div class="paw-divider" aria-hidden="true"></div>
 
+    <!--SECCION POR QUÉ ELEGIR PATITAS CR-->
         <section id="sobre-nosotros" aria-labelledby="titulo-sobre">
             <div class="container">
                 <h2 id="titulo-sobre">¿Por qué elegir Patitas CR? <span aria-hidden="true">🐾</span></h2>
                 <p class="seccion-desc">Los albergues costarricenses enfrentan sobrepoblación crítica. Facilitamos la
                     adopción de forma estructurada, transparente y segura.</p>
+                    <!--DIVISION PARA SEPARAR LOS BENEFICIOS-->
                 <div class="beneficios-grid">
+                    <!--SE SEPARAN POR ARTICULOS-->
                     <article class="beneficio-card">
                         <span class="beneficio-icono" aria-hidden="true">🔎</span>
                         <h4>Filtros inteligentes</h4>
@@ -140,26 +159,31 @@
         </section>
 
         <div class="paw-divider" aria-hidden="true"></div>
-
+    <!--SECCION FINALES FELICES-->
         <section id="finales-felices" aria-labelledby="titulo-exitos">
             <div class="container">
                 <h2 id="titulo-exitos">Finales Felices</h2>
                 <p class="seccion-desc">Ellos ya encontraron su hogar. Sus historias inspiran a seguir.</p>
+                <!--ACA SE VAN A CARGAR LAS HISTORIAS DE ADOPTANTES-->
+                <!--LO DE POLITE ES PARA INDICAR QUE EL CONTENIDO SE ACTUALIZA DE FORMA AUTOMÁTICA, INDICA COMO QUE ESTA CARGANDO-->
                 <div id="contenedor-casos" class="casos-grid" aria-live="polite">
                     <p class="estado-cargando">Cargando historias...</p>
                 </div>
+                <!--BLOQUE DE LLAMADA A LA ACCIÓN, QUE CON EL BOTON NOS REFIERE AL CATALOGO-->
                 <div class="casos-cta">
                     <a href="catalogo.html" class="btn-primary">Ver mascotas disponibles ahora</a>
                 </div>
             </div>
         </section>
 
+        <!--ULTIMA SECCION, AGRUPA TODO EN UNA LLAMADA A LA ACCIÓN-->
         <section class="cta-section" aria-labelledby="titulo-cta">
             <div class="container cta-content">
                 <div class="cta-text">
                     <h2 id="titulo-cta">¿Listo para cambiar una vida?</h2>
                     <p>Un animal te está esperando. El proceso es más sencillo de lo que creés.</p>
                 </div>
+                <!--DIVISION PARA LAS ACCIONES, CON LOS BOTONES-->
                 <div class="cta-acciones">
                     <a href="catalogo.html" class="btn-primary btn-grande">Ver mascotas</a>
                     <a href="registro.html" class="btn-outline btn-grande">Contactar refugio</a>
@@ -194,6 +218,7 @@
             <small>© 2026 Patitas CR · Desarrollo académico – UTN · Todos los derechos reservados.</small>
         </div>
     </footer>
+    <!--CONECTA EL ARCHIVO DE JAVASCRIPT-->
 <script src="js/main.js"></script>
 </body>
 </html>

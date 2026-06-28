@@ -13,6 +13,25 @@ const btnLimpiar    = document.getElementById('btn-limpiar');
 const statMostrando = document.getElementById('stat-mostrando');
 const statFavoritos = document.getElementById('stat-favoritos');
 const toast         = document.getElementById('toast');
+
+const modalAdopcion         = document.getElementById('modal-adopcion');
+const modalCerrar           = document.getElementById('modal-cerrar');
+const btnCancelarModal      = document.getElementById('btn-cancelar-modal');
+const formAdopcion          = document.getElementById('form-adopcion');
+const modalConfirmacion     = document.getElementById('modal-confirmacion');
+const confirmacionTexto     = document.getElementById('confirmacion-texto');
+const btnCerrarConfirmacion = document.getElementById('btn-cerrar-confirmacion');
+const modalSubtitulo        = document.getElementById('modal-subtitulo');
+const inputMascotaId        = document.getElementById('adopcion-mascota-id');
+const inputMascotaNombre    = document.getElementById('adopcion-mascota-nombre');
+const inputNombre           = document.getElementById('adopcion-nombre');
+const inputEmail            = document.getElementById('adopcion-email');
+const inputTelefono         = document.getElementById('adopcion-telefono');
+const inputMotivo           = document.getElementById('adopcion-motivo');
+const errorNombre           = document.getElementById('error-adopcion-nombre');
+const errorEmail            = document.getElementById('error-adopcion-email');
+const errorTelefono         = document.getElementById('error-adopcion-telefono');
+
 let listenersAdjuntados = false;
 
 /* ── LOCALSTORAGE ── */
@@ -226,10 +245,99 @@ function adjuntarEventos() {
         if (btnAdoptar) {
             const id     = btnAdoptar.dataset.id;
             const nombre = btnAdoptar.dataset.nombre;
-            localStorage.setItem('patitas_mascota_seleccionada', JSON.stringify({ id, nombre }));
-            window.location.href = 'registro.html';
+            abrirModalAdopcion(id, nombre);
         }
     });
+
+    modalCerrar.addEventListener('click', cerrarModalAdopcion);
+    btnCancelarModal.addEventListener('click', cerrarModalAdopcion);
+
+    modalAdopcion.addEventListener('click', (event) => {
+        if (event.target === modalAdopcion) {
+            cerrarModalAdopcion();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modalAdopcion.hidden) {
+            cerrarModalAdopcion();
+        }
+    });
+
+    formAdopcion.addEventListener('submit', manejarEnvioFormulario);
+    btnCerrarConfirmacion.addEventListener('click', cerrarModalAdopcion);
+}
+
+function abrirModalAdopcion(id, nombre) {
+    if (!modalAdopcion) return;
+
+    formAdopcion.reset();
+    limpiarErroresFormulario();
+
+    inputMascotaId.value     = id;
+    inputMascotaNombre.value = nombre;
+    modalSubtitulo.textContent = `Vas a solicitar la adopción de ${nombre}`;
+
+    modalConfirmacion.hidden = true;
+    formAdopcion.hidden = false;
+    modalAdopcion.hidden = false;
+}
+
+function cerrarModalAdopcion() {
+    if (!modalAdopcion) return;
+    modalAdopcion.hidden = true;
+    modalConfirmacion.hidden = true;
+    formAdopcion.hidden = false;
+    limpiarErroresFormulario();
+    formAdopcion.reset();
+}
+
+function limpiarErroresFormulario() {
+    if (errorNombre) errorNombre.textContent = '';
+    if (errorEmail) errorEmail.textContent = '';
+    if (errorTelefono) errorTelefono.textContent = '';
+}
+
+function validarFormularioAdopcion() {
+    const nombre  = inputNombre.value.trim();
+    const email   = inputEmail.value.trim();
+    const telefono = inputTelefono.value.trim();
+
+    let esValido = true;
+    limpiarErroresFormulario();
+
+    if (!nombre) {
+        errorNombre.textContent = 'Por favor, ingresá tu nombre completo.';
+        esValido = false;
+    }
+
+    if (!email) {
+        errorEmail.textContent = 'Por favor, ingresá tu correo electrónico.';
+        esValido = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEmail.textContent = 'Ingresá un correo válido.';
+        esValido = false;
+    }
+
+    if (!telefono) {
+        errorTelefono.textContent = 'Por favor, ingresá tu teléfono.';
+        esValido = false;
+    }
+
+    return esValido;
+}
+
+function manejarEnvioFormulario(event) {
+    event.preventDefault();
+
+    if (!validarFormularioAdopcion()) {
+        return;
+    }
+
+    const nombreMascota = inputMascotaNombre.value || 'la mascota seleccionada';
+    confirmacionTexto.textContent = `Tu solicitud de adopción para ${nombreMascota} fue enviada correctamente.`;
+    formAdopcion.hidden = true;
+    modalConfirmacion.hidden = false;
 }
 
 /* ── FAVORITOS ── */

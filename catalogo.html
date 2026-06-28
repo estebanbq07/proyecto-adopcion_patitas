@@ -11,17 +11,20 @@
 </head>
 
 <body>
-
+    <!--HEADER-->
     <header class="site-header">
         <div class="container header-content">
+            <!--MEDIANTE LA IMAGEN Y EL TITULO DEL HEADER PODEMOS IR AL INCIO-->
             <a href="index.html" class="logo" aria-label="Patitas CR - Inicio">
                 <img src="Images/adoptaPatitas/Imagen1.jpg" alt="Patitas CR" class="logo-image">
                 <strong>Patitas CR</strong>
             </a>
+            <!--ESTO FUNCIONA COMO UN CHECKBOX QUE SI ESTA MARCADO MUESTRA EL MENU, ESTO FUNCIONA JUNTO CON EL CSS-->
             <input type="checkbox" id="menu-toggle" class="menu-toggle">
             <label for="menu-toggle" class="menu-button" aria-label="Abrir menú">
                 <span></span><span></span><span></span>
             </label>
+            <!--NAV PARA LOS ENLACES DE NAVEGACIÓN-->
             <nav class="main-nav" aria-label="Navegación principal">
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
@@ -33,16 +36,18 @@
         </div>
     </header>
 
+    <!--ESTO ES PARA SABER LA UBICACIÓN ACTUAL-->
     <nav class="breadcrumb" aria-label="Ubicación actual">
         <div class="container"><a href="index.html">Inicio</a><span>Adoptar Mascotas</span></div>
     </nav>
 
     <main>
-
+    <!--CLASS HERO ES LA PRIMERA SECCION-->
         <section class="catalogo-hero">
             <div class="container">
                 <h1>Encontrá a tu compañero ideal</h1>
                 <p>Buscá y filtrá entre todas las mascotas disponibles para adopción.</p>
+                    <!--DIVISION QUE MUESTRA LAS ESTADÍSTICAS DEL CATALOGO-->
                 <div class="catalogo-stats" id="catalogo-stats" aria-live="polite">
                     <span id="stat-mostrando">Cargando...</span>
                     <span class="stat-sep" aria-hidden="true">·</span>
@@ -51,17 +56,28 @@
             </div>
         </section>
 
+            <!--SECCION DE CONTROLES DE BUSQUEDA Y FILTROS-->
         <section class="controles-section" aria-label="Buscar y filtrar mascotas">
+            <!--ESTAS DOS CLASES, UNA ES PARA CENTRAR Y LA OTRA ES PARA ACOMODAR LOS FILTROS-->
             <div class="container controles-wrapper">
+
+                <!--AGRUPA TODO EL BUSCADOR, SECCION PARA EL BUSCADOR-->
                 <div class="busqueda-wrapper">
+                    <!--EL SR-ONLY ES PARA PANTALLAS LECTORES DE PANTALLA, PERSONAS CON DISCAPACIDAD-->
                     <label for="campo-busqueda" class="sr-only">Buscar mascota por nombre o raza</label>
                     <span class="busqueda-icono" aria-hidden="true"></span>
+                    <!--INPUT PARA EL BUSCADOR, DE TIPO SEARCH-->
                     <input type="search" id="campo-busqueda" class="campo-busqueda"
                         placeholder="Buscar por nombre o raza..." autocomplete="off" aria-label="Buscar mascota">
                 </div>
+
+                <!--DIVISION PARA LOS FILTROS-->
+                <!--EL ARIA LABEL ES PARA PANTALLAS LECTORES DE PANTALLA, PERSONAS CON DISCAPACIDAD-->
                 <div class="filtros-grupo" role="group" aria-label="Filtros de búsqueda">
+                    <!--CADA FILTRO ES UN DIV CON LA CLASE filtro-item, CADA UNO ES INDEPENDIENTE-->
                     <div class="filtro-item">
                         <label for="filtro-especie">Especie</label>
+                        <!--EL SELECT CREA UN MENÚ DESPLEGABLE PARA SELECCIONAR LA ESPECIE-->
                         <select id="filtro-especie" class="filtro-select">
                             <option value="todos">Todas</option>
                             <option value="perro">Perros</option>
@@ -70,6 +86,7 @@
                     </div>
                     <div class="filtro-item">
                         <label for="filtro-edad">Edad</label>
+                        <!--EL SELECT CREA UN MENÚ DESPLEGABLE PARA SELECCIONAR LA EDAD-->
                         <select id="filtro-edad" class="filtro-select">
                             <option value="todos">Todas</option>
                             <option value="cachorro">Cachorro (- de 1 año)</option>
@@ -80,6 +97,7 @@
                     </div>
                     <div class="filtro-item">
                         <label for="filtro-tamaño">Tamaño</label>
+                        <!--EL SELECT CREA UN MENÚ DESPLEGABLE PARA SELECCIONAR EL TAMAÑO-->
                         <select id="filtro-tamaño" class="filtro-select">
                             <option value="todos">Todos</option>
                             <option value="pequeño">Pequeño</option>
@@ -89,35 +107,50 @@
                     </div>
                     <div class="filtro-item">
                         <label for="filtro-vista">Ver</label>
+                        <!--EL SELECT CREA UN MENÚ DESPLEGABLE PARA SELECCIONAR LA VISTA-->
                         <select id="filtro-vista" class="filtro-select">
                             <option value="todos">Todos</option>
                             <option value="favoritos">Mis favoritos</option>
                             <option value="urgentes">Urgentes</option>
                         </select>
                     </div>
+                    <!--BOTON PARA LIMPIAR LOS FILTROS-->
                     <button id="btn-limpiar" class="btn-limpiar" aria-label="Limpiar filtros">Limpiar</button>
                 </div>
             </div>
         </section>
 
+        <!--ACA COMIENZA EL CATALOGO DE MASCOTAS-->
+        <!--EL ARIA-LABEL ES PARA PANTALLAS LECTORES DE PANTALLA, PERSONAS CON DISCAPACIDAD-->
         <section class="catalogo-section" aria-labelledby="titulo-catalogo">
             <div class="container">
+                <!--EL SR-ONLY ES PARA PANTALLAS LECTORES DE PANTALLA, PERSONAS CON DISCAPACIDAD, para que se guien-->
                 <h2 id="titulo-catalogo" class="sr-only">Mascotas disponibles</h2>
+                <!--EL TOAST ES PARA MOSTRAR MENSAJES DE NOTIFICACIÓN, ejem: ❤️ Agregado a favoritos-->
                 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+                <!--EN ESTA DIVISION EL GRID VA A SER DONDE JAVASCRIPT VA A DIBUJAR LAS MASCOTAS-->
                 <div id="grid-mascotas" class="mascotas-grid" aria-live="polite"></div>
             </div>
         </section>
 
-        <!-- MODAL SOLICITUD DE ADOPCIÓN -->
+        <!--DIVISION DEL MODAL SOLICITUD DE ADOPCIÓN, EL ROLE="DIALOG" AYUDA A LOS LECTORES, ES UNA VENTANA DE DIALOGO -->
+        <!--EL HIDDEN ES PARA OCULTAR EL MODAL POR DEFECTO-->
         <div id="modal-adopcion" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo"
             hidden>
+
+            <!--ESTA DIVISION CONTIENE LA CAJA DONDE ESTA EL MODAL-->
             <div class="modal-caja">
+                <!--BOTON PARA CERRAR EL MODAL-->
                 <button class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">×</button>
+
+                <!--DIVISION DEL ENCABEZADO DEL MODAL-->
                 <div class="modal-encabezado">
+                    <!--PONDRA UN EMOJI, DEPENDIENDO SI ES GATO O PERRO-->
                     <span id="modal-emoji" aria-hidden="true"></span>
                     <h2 id="modal-titulo">Solicitar adopción</h2>
                     <p id="modal-subtitulo">Completá el formulario para expresar tu interés.</p>
                 </div>
+                <!--ACA COMIENZA EL FORMULARIO-->
                 <form id="form-adopcion" novalidate>
                     <input type="hidden" id="adopcion-mascota-id">
                     <input type="hidden" id="adopcion-mascota-nombre">
