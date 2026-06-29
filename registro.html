@@ -31,12 +31,13 @@
     </div>
 </header>
 
+<!--ESTE NAV ES PARA QUE EL USUARIO SE PUEDA UBICAR AL IGUAL QUE ESTA CON UN ARIA-LABEL PARA PERSONA CON DISCAPACIDAD, Y TAMBIEN PUEDA UBICARSE -->
 <nav class="breadcrumb" aria-label="Ubicación actual">
     <div class="container"><a href="index.html">Inicio</a><span>Solicitudes de Adopción</span></div>
 </nav>
 
 <main>
-
+<!--ESTA ES LA SECCION DE GESTION DE SOLICITUDES, la primera que se muestra al usuario -->
     <section class="gestion-hero">
         <div class="container">
             <h1>Solicitudes de Adopción</h1>
@@ -44,38 +45,51 @@
         </div>
     </section>
 
+    <!--ESTO ES UN  SEPARADOR, pero los lectores de pantalla lo ignoran-->
     <div class="paw-divider" aria-hidden="true"></div>
 
+    <!--ACA YA SE ENCUENTRAN LOS AMBOS LADOS PRINCIPALES, FORMULARIO Y LISTA DE SOLICITUDES -->
     <section class="gestion-layout-section">
+        <!--ESTE DIV CONTIENE EL LAYOUT QUE HACE QUE EL PANEL LATERAL PERMANEZCA AL LADO DEL FORMULARIO-->
         <div class="container gestion-layout">
 
-            <!-- ── FORMULARIO ── -->
+            <!--FORMULARIO DE SOLICITUD-->
             <div class="gestion-formulario-col">
                 <div class="formulario-wrapper">
 
-                    <!-- Encabezado dinámico según modo (nueva / editar) -->
+                    <!--CONTIENE EL TITULO -->
                     <div class="form-encabezado">
                         <h2 id="form-titulo">Nueva solicitud de adopción</h2>
                         <p>Campos marcados con <span aria-label="obligatorio">*</span> son obligatorios.</p>
                     </div>
 
-                    <!-- Aviso de mascota preseleccionada desde catálogo -->
+                    <!--ESTE DIV QUE MUESTRA LA INFORMACIÓN DE LA MASCOTA PRESELECCIONADA, esta oculto hasta que haya una-->
                     <div id="aviso-mascota" class="aviso-mascota" hidden>
                         <span aria-hidden="true"></span>
+                        <!--VA A MOSTRAR EL NOMBRE DE LA MASCOTA SELECCIONADA, pero va a empezar vacio-->
                         <span id="aviso-mascota-texto">Vas a solicitar la adopción de <strong id="aviso-nombre"></strong></span>
                         <button id="btn-quitar-mascota" aria-label="Quitar mascota preseleccionada">×</button>
                     </div>
 
+                    <!--DENTRO DE ESTA ETIQUETA FORM SE VAN A ENCONTRAR TODOS LOS CONTROLES QUE EL USUARIO VA A LLENAR-->
+                    <!--EL NOVALIDATE ES POR SI EL NAVEGADOR TIENE HABILITADA LA VALIDACIÓN POR DEFECTO -->
                     <form id="form-solicitud" novalidate>
+                        <!--ESTOS INPUTS OCULTOS ALMACENAN INFORMACION PARA JS -->
                         <input type="hidden" id="sol-id-edicion">
 
+                        <!--DENTRO DEL FIELDSET SE ENCUENTRAN LOS CAMPOS DEL FORMULARIO-->
                         <fieldset class="form-fieldset">
                             <legend>Tus datos</legend>
+
+                            <!--EN ESTOS DIV SE GUARDA CADA CAMPO DEL FORMULARIO, nombre, email, teléfono-->
                             <div class="campo-grupo">
+                                <!--SI ESTA PRIMERO EL LABEL QUE HACE REFERENCIA AL ID Y DESPUES EL TYPE CON EL ID, SIGNIFICA QUE CUANDO APRIETA EL LABEL, SE ENFOCA EL INPUT -->
                                 <label for="sol-nombre">Nombre completo *</label>
                                 <input type="text" id="sol-nombre" placeholder="Ej: Luis Campos" autocomplete="name" maxlength="80">
+                                <!--ESTO ES POR SI DEJA EL CAMPO VACIO-->
                                 <span class="campo-error" id="error-nombre"></span>
                             </div>
+                            <!--ESTE DIV CONTIENE LOS CAMPOS DE EMAIL Y TELÉFONO EN UNA MISMA FILA -->
                             <div class="campos-fila">
                                 <div class="campo-grupo">
                                     <label for="sol-email">Correo electrónico *</label>
@@ -88,15 +102,25 @@
                                     <span class="campo-error" id="error-telefono"></span>
                                 </div>
                             </div>
+
+                            <div class="campo-grupo">
+                                <label for="sol-direccion">Dirección *</label>
+                                <input type="text" id="sol-direccion" placeholder="Ej: San José, Costa Rica" autocomplete="street-address" maxlength="120">
+                                <span class="campo-error" id="error-direccion"></span>
+                            </div>
                         </fieldset>
 
+                        <!--DENTRO DE ESTE FIELDSET SE ENCUENTRAN LOS CAMPOS RELACIONADOS CON LA MASCOTA DE INTERÉS -->
                         <fieldset class="form-fieldset">
                             <legend>Mascota de interés</legend>
+                            <!--ESTE DIV ES PARA EL NOMBRE DE LA MASCOTA -->
                             <div class="campo-grupo">
+                                <!--IGUAL QUE LA ANTERIOR CON QUE PRECIONE EL TITULO LO MANDA AL INPUT POR EL ID-->
                                 <label for="sol-mascota">Nombre de la mascota *</label>
                                 <input type="text" id="sol-mascota" placeholder="Ej: Toby">
                                 <span class="campo-error" id="error-mascota"></span>
                             </div>
+                            <!--ESTE DIV ES PARA EL MOTIVO DE ADOPTAR -->
                             <div class="campo-grupo">
                                 <label for="sol-motivo">¿Por qué querés adoptar? *</label>
                                 <textarea id="sol-motivo" rows="4"
@@ -109,12 +133,16 @@
                             </div>
                         </fieldset>
 
+                        <!--ESTE DIV COMIENZA OCULTO PERO CUANDO SE ENVIA EL FORMULARIO SE MUESTRA, si se proceso bien o no-->
                         <div id="form-mensaje" class="form-mensaje" role="status" aria-live="polite" hidden></div>
 
+
+                        <!--ESTE DIV AGRUPA TODOS LOS BOTONES DE ACCION-->
                         <div class="form-acciones">
                             <button type="submit" class="btn-primary btn-submit" id="btn-enviar">
                                 Enviar solicitud
                             </button>
+                        <!--ESTE BOTON ES PARA CANCELAR LA EDICION DE UNA SOLICITUD EXISTENTE, pero se muestra solo cuando se está editando una solicitud -->
                             <button type="button" class="btn-secundario" id="btn-cancelar-edicion" hidden>
                                 Cancelar edición
                             </button>
@@ -126,24 +154,31 @@
                 </div>
             </div>
 
-            <!-- ── ASIDE ── -->
-            <aside class="gestion-aside" aria-label="Tus solicitudes registradas">
 
+            <!-- ASIDE, MUESTRA LO QUE SE ENCUENTRA AL APAR DEL FORMULARIO -->
+            <aside class="gestion-aside" aria-label="Tus solicitudes registradas">
+                <!--ESTE DIV MUESTRA UN RESUMEN DE LA ACTIVIDAD DEL USUARIO, en una tarjeta -->
                 <div class="aside-card">
                     <h3>Tu actividad</h3>
+                    <!--ESTE CONTENEDOR ORGANIZA ESTADISTICAS-->
                     <div class="actividad-grid">
+                        <!--ESTE DIV MUESTRA EL NÚMERO DE SOLICITUDES REGISTRADAS, empieza mostrando 0, despues lo cambia el js-->
                         <div class="actividad-item">
                             <span class="actividad-num" id="resumen-solicitudes">0</span>
                             <span class="actividad-label">Solicitudes</span>
                         </div>
+                        <!--ESTE DIV MUESTRA EL NÚMERO DE FAVORITOS, empieza mostrando 0, despues lo cambia el js-->
                         <div class="actividad-item">
                             <span class="actividad-num" id="resumen-favoritos">0</span>
                             <span class="actividad-label">Favoritos</span>
                         </div>
                     </div>
+                    <!--ACA ES UNA REFERENCIA QUE MANDA DE NUEVO AL CATÁLOGO-->
                     <a href="catalogo.html" class="btn-ver-catalogo">Ver catálogo →</a>
                 </div>
 
+                <!--tarjeta, MUESTRA LAS SOLICITUDES REGISTRADAS-->
+                <!--SOLO VA A TENER DOS ELEMENTOS, solicitudes registradas y eliminar todass-->
                 <div class="aside-card">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sm);padding-bottom:10px;border-bottom:1.5px solid var(--crema-oscuro);">
                         <h3 style="margin:0;border:none;padding:0;">Solicitudes registradas</h3>
@@ -151,11 +186,13 @@
                             Eliminar todas
                         </button>
                     </div>
+                    <!--ESTO SALE POR DEFECTO CUANDO AUN NO HAY SOLICITUDES REGISTRADAS, CUANDO SI HAYAN EL JS LO CAMBIARA-->
                     <div id="lista-solicitudes" aria-live="polite">
                         <p class="aside-vacio">Todavía no registraste ninguna solicitud.</p>
                     </div>
                 </div>
 
+                <!--tarjeta, MUESTRA CONSEJOS PARA ADOPTAR-->
                 <div class="aside-card aside-consejos">
                     <h3>Consejos para adoptar</h3>
                     <ul class="consejos-lista">
@@ -174,6 +211,7 @@
 </main>
 
 <!-- MODAL VER DETALLE -->
+<!--ESTE ES PARECIDO AL DE CATALOGO PERO ESTE NOS VA A DAR LA INFORMACIÓN DETALLADA DE CADA SOLICITUD -->
 <div id="modal-detalle" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="detalle-titulo" hidden>
         <div class="modal-caja">
         <button class="modal-cerrar" id="cerrar-detalle" aria-label="Cerrar">×</button>
@@ -190,6 +228,7 @@
 </div>
 
 <!-- MODAL CONFIRMAR ELIMINAR -->
+<!--LO MISMO, PERO PARA CONFIRMAR LA ELIMINACIÓN DE UNA SOLICITUD -->
 <div id="modal-eliminar" class="modal-overlay" role="dialog" aria-modal="true" hidden>
     <div class="modal-caja modal-caja-sm">
         <h2>Confirmar eliminación</h2>
@@ -227,6 +266,7 @@
     </div>
 </footer>
 
+<!--CONEXIÓN A LOS ARCHIVOS JS-->
 <script src="js/gestion.js"></script>
 </body>
 </html>

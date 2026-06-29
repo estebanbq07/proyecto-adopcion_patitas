@@ -151,10 +151,13 @@
                     <p id="modal-subtitulo">Completá el formulario para expresar tu interés.</p>
                 </div>
                 <!--ACA COMIENZA EL FORMULARIO-->
+                <!--EN LOS INPUT OCULTOS EL USUARIO NO LOS VE, PERO VAN A ALMACENAR INFORMACION-->
                 <form id="form-adopcion" novalidate>
                     <input type="hidden" id="adopcion-mascota-id">
                     <input type="hidden" id="adopcion-mascota-nombre">
 
+                    <!--DIVISION DE LOS CAMPOS DEL FORMULARIO, EL ASTERISCO SIGNIFICA QUE ES REQUERIDO-->
+                    <!--TODOS LOS CAMPOS ESTAN SEPARADOS POR UNA DIVISION, TIENEN LA MISMA CLASE-->
                     <div class="campo-grupo">
                         <label for="adopcion-nombre">Nombre completo *</label>
                         <input type="text" id="adopcion-nombre" placeholder="Ej: María Rodríguez" autocomplete="name">
@@ -173,18 +176,22 @@
                     <div class="campo-grupo">
                         <label for="adopcion-motivo">¿Por qué querés adoptar esta mascota?</label>
                         <textarea id="adopcion-motivo" rows="3"
-                            placeholder="Contanos sobre vos y tu hogar..."></textarea>
+                        placeholder="Contanos sobre vos y tu hogar..."></textarea>
                     </div>
+
+                    <!--ESTA DIVISION AGRUPA LOS BOTONES DEL MODAL-->
                     <div class="modal-acciones">
                         <button type="submit" class="btn-primary">Enviar solicitud</button>
                         <button type="button" class="btn-cancelar" id="btn-cancelar-modal">Cancelar</button>
                     </div>
                 </form>
 
+                <!--ESTE DIV COMIENZA OCULTO, SIRVE PARA MOSTRAR LA CONFIRMACION DE ENVIO-->
                 <div id="modal-confirmacion" class="modal-confirmacion" hidden>
                     <span class="confirmacion-icono" aria-hidden="true"></span>
                     <h3>¡Solicitud enviada!</h3>
                     <p id="confirmacion-texto"></p>
+                    <!--CUANDO EL USUARIO HACE CLICK EN EL BOTON, SE CIERRA EL MODAL-->
                     <button class="btn-primary" id="btn-cerrar-confirmacion">Entendido</button>
                 </div>
             </div>
@@ -217,6 +224,8 @@
             <small>© 2026 Patitas CR · Desarrollo académico – UTN · Todos los derechos reservados.</small>
         </div>
     </footer>
+
+    <!--CONEXIÓN A LOS ARCHIVOS JS-->
     <script src="js/catalogo.js"></script>
 
 </body>

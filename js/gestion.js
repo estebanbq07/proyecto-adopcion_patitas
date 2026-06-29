@@ -24,11 +24,12 @@ const detalleContenido  = document.getElementById('detalle-contenido');
 const modalEliminar     = document.getElementById('modal-eliminar');
 
 const campos = {
-    nombre:   document.getElementById('sol-nombre'),
-    email:    document.getElementById('sol-email'),
-    telefono: document.getElementById('sol-telefono'),
-    mascota:  document.getElementById('sol-mascota'),
-    motivo:   document.getElementById('sol-motivo'),
+    nombre:     document.getElementById('sol-nombre'),
+    email:      document.getElementById('sol-email'),
+    telefono:   document.getElementById('sol-telefono'),
+    direccion:  document.getElementById('sol-direccion'),
+    mascota:    document.getElementById('sol-mascota'),
+    motivo:     document.getElementById('sol-motivo'),
 };
 
 /* ── LOCALSTORAGE ── */
@@ -90,6 +91,7 @@ function validarCampo(campoId, errorId) {
     if (campoId === 'sol-nombre'   && v.length < 3)  { marcarError(campoId, errorId, 'El nombre debe tener al menos 3 caracteres.'); return false; }
     if (campoId === 'sol-email'    && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { marcarError(campoId, errorId, 'Ingresá un correo válido.'); return false; }
     if (campoId === 'sol-telefono' && !/^[\d\s\-+()]{7,15}$/.test(v)) { marcarError(campoId, errorId, 'Ingresá un teléfono válido (ej: 8888-8888).'); return false; }
+    if (campoId === 'sol-direccion' && v.length < 5) { marcarError(campoId, errorId, 'Ingresá una dirección válida.'); return false; }
     if (campoId === 'sol-mascota'  && v.length < 2)  { marcarError(campoId, errorId, 'Ingresá el nombre de la mascota.'); return false; }
     if (campoId === 'sol-motivo'   && v.length < 20) { marcarError(campoId, errorId, 'Contanos un poco más (mínimo 20 caracteres).'); return false; }
     marcarValido(campoId, errorId);
@@ -98,11 +100,12 @@ function validarCampo(campoId, errorId) {
 
 function validarTodo() {
     return [
-        validarCampo('sol-nombre',   'error-nombre'),
-        validarCampo('sol-email',    'error-email'),
-        validarCampo('sol-telefono', 'error-telefono'),
-        validarCampo('sol-mascota',  'error-mascota'),
-        validarCampo('sol-motivo',   'error-motivo'),
+        validarCampo('sol-nombre',     'error-nombre'),
+        validarCampo('sol-email',      'error-email'),
+        validarCampo('sol-telefono',   'error-telefono'),
+        validarCampo('sol-direccion',  'error-direccion'),
+        validarCampo('sol-mascota',    'error-mascota'),
+        validarCampo('sol-motivo',     'error-motivo'),
     ].every(Boolean);
 }
 
@@ -168,11 +171,12 @@ formSolicitud.addEventListener('submit', e => {
     }
 
     const datos = {
-        nombre:   campos.nombre.value.trim(),
-        email:    campos.email.value.trim(),
-        telefono: campos.telefono.value.trim(),
-        mascota:  campos.mascota.value.trim(),
-        motivo:   campos.motivo.value.trim(),
+        nombre:    campos.nombre.value.trim(),
+        email:     campos.email.value.trim(),
+        telefono:  campos.telefono.value.trim(),
+        direccion: campos.direccion.value.trim(),
+        mascota:   campos.mascota.value.trim(),
+        motivo:    campos.motivo.value.trim(),
     };
 
     if (modoEdicion !== null) {
@@ -205,11 +209,12 @@ function activarEdicion(id) {
     modoEdicion = id;
     document.getElementById('sol-id-edicion').value = id;
 
-    campos.nombre.value   = sol.nombre;
-    campos.email.value    = sol.email;
-    campos.telefono.value = sol.telefono;
-    campos.mascota.value  = sol.mascota;
-    campos.motivo.value   = sol.motivo;
+    campos.nombre.value    = sol.nombre;
+    campos.email.value     = sol.email;
+    campos.telefono.value  = sol.telefono;
+    campos.direccion.value = sol.direccion || '';
+    campos.mascota.value   = sol.mascota;
+    campos.motivo.value    = sol.motivo;
 
     if (contadorMotivo) contadorMotivo.textContent = sol.motivo.length;
 
@@ -241,6 +246,7 @@ function abrirDetalle(id) {
                 <tr><th>Nombre</th><td>${sol.nombre}</td></tr>
                 <tr><th>Correo</th><td>${sol.email}</td></tr>
                 <tr><th>Teléfono</th><td>${sol.telefono}</td></tr>
+                <tr><th>Dirección</th><td>${sol.direccion || 'No especificada'}</td></tr>
                 <tr><th>Mascota</th><td>${sol.mascota}</td></tr>
                 <tr><th>Motivo</th><td>${sol.motivo}</td></tr>
                 <tr><th>Fecha envío</th><td>${sol.fecha}</td></tr>
