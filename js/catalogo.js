@@ -277,6 +277,7 @@ function abrirModalAdopcion(id, nombre) {
     inputMascotaId.value     = id;
     inputMascotaNombre.value = nombre;
     modalSubtitulo.textContent = `Vas a solicitar la adopción de ${nombre}`;
+    localStorage.setItem('patitas_mascota_seleccionada', JSON.stringify({ id, nombre }));
 
     modalConfirmacion.hidden = true;
     formAdopcion.hidden = false;
@@ -334,7 +335,23 @@ function manejarEnvioFormulario(event) {
         return;
     }
 
-    const nombreMascota = inputMascotaNombre.value || 'la mascota seleccionada';
+    const solicitudesGuardadas = JSON.parse(localStorage.getItem('patitas_solicitudes') || '[]');
+    const nuevaSolicitud = {
+        id: Date.now(),
+        nombre: inputNombre.value.trim(),
+        email: inputEmail.value.trim(),
+        telefono: inputTelefono.value.trim(),
+        direccion: '',
+        mascota: inputMascotaNombre.value.trim() || 'Mascota sin nombre',
+        motivo: inputMotivo.value.trim(),
+        fecha: new Date().toLocaleDateString('es-CR'),
+        fechaEdicion: null
+    };
+
+    solicitudesGuardadas.push(nuevaSolicitud);
+    localStorage.setItem('patitas_solicitudes', JSON.stringify(solicitudesGuardadas));
+
+    const nombreMascota = nuevaSolicitud.mascota;
     confirmacionTexto.textContent = `Tu solicitud de adopción para ${nombreMascota} fue enviada correctamente.`;
     formAdopcion.hidden = true;
     modalConfirmacion.hidden = false;
