@@ -27,10 +27,12 @@ const inputMascotaNombre    = document.getElementById('adopcion-mascota-nombre')
 const inputNombre           = document.getElementById('adopcion-nombre');
 const inputEmail            = document.getElementById('adopcion-email');
 const inputTelefono         = document.getElementById('adopcion-telefono');
+const inputDireccion        = document.getElementById('adopcion-direccion');
 const inputMotivo           = document.getElementById('adopcion-motivo');
 const errorNombre           = document.getElementById('error-adopcion-nombre');
 const errorEmail            = document.getElementById('error-adopcion-email');
 const errorTelefono         = document.getElementById('error-adopcion-telefono');
+const errorDireccion        = document.getElementById('error-adopcion-direccion');
 
 let listenersAdjuntados = false;
 
@@ -297,12 +299,14 @@ function limpiarErroresFormulario() {
     if (errorNombre) errorNombre.textContent = '';
     if (errorEmail) errorEmail.textContent = '';
     if (errorTelefono) errorTelefono.textContent = '';
+    if (errorDireccion) errorDireccion.textContent = '';
 }
 
 function validarFormularioAdopcion() {
-    const nombre  = inputNombre.value.trim();
-    const email   = inputEmail.value.trim();
-    const telefono = inputTelefono.value.trim();
+    const nombre    = inputNombre.value.trim();
+    const email     = inputEmail.value.trim();
+    const telefono  = inputTelefono.value.trim();
+    const direccion = inputDireccion.value.trim();
 
     let esValido = true;
     limpiarErroresFormulario();
@@ -325,6 +329,11 @@ function validarFormularioAdopcion() {
         esValido = false;
     }
 
+    if (!direccion) {
+        errorDireccion.textContent = 'Por favor, ingresá tu dirección.';
+        esValido = false;
+    }
+
     return esValido;
 }
 
@@ -341,7 +350,7 @@ function manejarEnvioFormulario(event) {
         nombre: inputNombre.value.trim(),
         email: inputEmail.value.trim(),
         telefono: inputTelefono.value.trim(),
-        direccion: '',
+        direccion: inputDireccion.value.trim(),
         mascota: inputMascotaNombre.value.trim() || 'Mascota sin nombre',
         motivo: inputMotivo.value.trim(),
         fecha: new Date().toLocaleDateString('es-CR'),
