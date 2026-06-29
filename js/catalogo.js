@@ -108,6 +108,7 @@ function actualizarEstadoFavorito(card, mascota) {
     button.innerHTML = esFav ? '❤️' : '🤍';
 }
 
+/* muestra tarjetas temporales mientras se cargan las mascotas desde el JSON */
 function crearSkeletonLoader() {
     if (!grid) return;
 
@@ -132,6 +133,7 @@ function crearSkeletonLoader() {
     grid.appendChild(frag);
 }
 
+/* actualiza el catálogo en pantalla mostrando las mascotas filtradas */
 function renderizar() {
     const lista = filtrar();
     statMostrando.textContent = `Mostrando ${lista.length} de ${todasLasMascotas.length} mascotas`;
@@ -232,6 +234,7 @@ function renderizar() {
     });
 }
 
+/* agrega los eventos principales del catálogo y del modal sin duplicarlos */
 function adjuntarEventos() {
     if (listenersAdjuntados) return;
     listenersAdjuntados = true;
@@ -270,6 +273,7 @@ function adjuntarEventos() {
     btnCerrarConfirmacion.addEventListener('click', cerrarModalAdopcion);
 }
 
+/* abre el modal de adopción con la mascota seleccionada */
 function abrirModalAdopcion(id, nombre) {
     if (!modalAdopcion) return;
 
@@ -286,6 +290,7 @@ function abrirModalAdopcion(id, nombre) {
     modalAdopcion.hidden = false;
 }
 
+/* cierra el modal de adopción, limpia errores y reinicia el formulario */
 function cerrarModalAdopcion() {
     if (!modalAdopcion) return;
     modalAdopcion.hidden = true;
@@ -295,6 +300,7 @@ function cerrarModalAdopcion() {
     formAdopcion.reset();
 }
 
+/* limpia los mensajes de error del formulario de adopción */
 function limpiarErroresFormulario() {
     if (errorNombre) errorNombre.textContent = '';
     if (errorEmail) errorEmail.textContent = '';
@@ -302,6 +308,7 @@ function limpiarErroresFormulario() {
     if (errorDireccion) errorDireccion.textContent = '';
 }
 
+/* valida que los campos obligatorios del formulario estén completos y correctos */
 function validarFormularioAdopcion() {
     const nombre    = inputNombre.value.trim();
     const email     = inputEmail.value.trim();
@@ -337,6 +344,7 @@ function validarFormularioAdopcion() {
     return esValido;
 }
 
+/* procesa el formulario de adopción y guarda la solicitud en localStorage */
 function manejarEnvioFormulario(event) {
     event.preventDefault();
 
