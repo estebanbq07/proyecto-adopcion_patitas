@@ -41,7 +41,7 @@ function cargarLS(clave) {
     try { return JSON.parse(localStorage.getItem(clave)) || []; } catch { return []; }
 }
 function guardarLS(clave, valor) {
-    localStorage.setItem(clave, JSON.stringify(valor));
+    localStorage.setItem(clave, JSON.stringify(valor));//Convierte el objeto en texto
 }
 
 /* ── CARGA JSON ── */
@@ -107,8 +107,7 @@ function actualizarEstadoFavorito(card, mascota) {
     button.setAttribute('aria-label', `${esFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}: ${mascota.nombre}`);
     button.innerHTML = esFav ? '❤️' : '🤍';
 }
-
-/* muestra tarjetas temporales mientras se cargan las mascotas desde el JSON */
+//para agregar la tarjeta gris atras de las imagenes- solo indica que esta cargando la info de las mascotas cuando no hayan animales 
 function crearSkeletonLoader() {
     if (!grid) return;
 
@@ -132,16 +131,18 @@ function crearSkeletonLoader() {
 
     grid.appendChild(frag);
 }
-
-/* actualiza el catálogo en pantalla mostrando las mascotas filtradas */
+//Actualiza los contadores de mascotas, perros y gatos en el HTML
+//Obteniendo la lista filtrada , si no encuentra dice que no hay mascotas
+/* Función que muestra las mascotas en la página */
 function renderizar() {
     const lista = filtrar();
+    //actualiza los contadores de mascotas, perros y gatos en el HTML
     statMostrando.textContent = `Mostrando ${lista.length} de ${todasLasMascotas.length} mascotas`;
     statFavoritos.textContent = `${favoritos.length} favorito${favoritos.length !== 1 ? 's' : ''}`;
 
     const vacioActual = grid.querySelector('.estado-vacio');
     if (vacioActual) vacioActual.remove();
-
+// si no hay mascotas que mostrar, muestra un mensaje de "No encontramos mascotas"
     if (lista.length === 0) {
         grid.querySelectorAll('.mascota-card').forEach(card => card.remove());
         grid.innerHTML += `
@@ -152,18 +153,18 @@ function renderizar() {
             </div>`;
         return;
     }
-
+// creamos un set con los ids de las mascotas filtradas para poder eliminar las tarjetas que ya no están en la lista a la hora de renderizar, y asi no tener que renderizar todo de nuevo, solo las que cambiaron
     const cardsActuales = Array.from(grid.querySelectorAll('.mascota-card'));
     const idsActuales = new Set(cardsActuales.map(card => Number(card.dataset.id)));
     const idsNuevos = new Set(lista.map(m => m.id));
-
+// recorre las tarjetas actuales y elimina las que no están en la lista filtrada
     cardsActuales.forEach(card => {
         const idCard = Number(card.dataset.id);
         if (!idsNuevos.has(idCard)) {
             card.remove();
         }
     });
-
+// crea un mapa de las tarjetas restantes para poder actualizar solo las que cambiaron, y no tener que renderizar todo de nuevo
     const cardsRestantes = new Map(Array.from(grid.querySelectorAll('.mascota-card')).map(card => [Number(card.dataset.id), card]));
     grid.style.opacity = '0';
 
@@ -173,6 +174,7 @@ function renderizar() {
         lista.forEach(m => {
             const cardExistente = cardsRestantes.get(m.id);
             if (cardExistente) {
+                //solo actualiza el estado de favorito si la tarjeta ya existe, para no tener que renderizar todo de nuevo
                 actualizarEstadoFavorito(cardExistente, m);
                 return;
             }
@@ -182,7 +184,7 @@ function renderizar() {
             card.className = 'mascota-card';
             card.dataset.id = m.id;
             card.setAttribute('aria-label', `Mascota: ${m.nombre}`);
-
+// construye el contenido HTML de la tarjeta, incluyendo la imagen, nombre, raza, descripción y botones de acción
             card.innerHTML = `
                 ${m.urgente ? '<span class="badge-urgente">Urgente</span>' : ''}
 
@@ -221,31 +223,31 @@ function renderizar() {
                     Solicitar adopción
                 </button>
             </div>`;
-
+                // se agrega la tarjeta al fragmento, que luego se agregará al grid de mascotas
             frag.appendChild(card);
         });
-
+// si hay tarjetas nuevas, se agregan al grid
         if (frag.childNodes.length) {
             grid.appendChild(frag);
         }
-
+//agrega los eventos a los botones de favorito y adopción, y muestra el grid  nuevamente
         adjuntarEventos();
         grid.style.opacity = '1';
     });
 }
 
-/* agrega los eventos principales del catálogo y del modal sin duplicarlos */
 function adjuntarEventos() {
     if (listenersAdjuntados) return;
     listenersAdjuntados = true;
 
     grid.addEventListener('click', (event) => {
+        //cuando se hace click en el boton de favorito, se llama a la funcion toggleFavorito con el id de la mascota
         const btnFav = event.target.closest('.btn-favorito');
         if (btnFav) {
             toggleFavorito(parseInt(btnFav.dataset.id, 10));
             return;
         }
-
+        //cuando se hace click en el boton de adopcion, se abre el modal de adopcion con el id y nombre de la mascota
         const btnAdoptar = event.target.closest('.btn-adoptar');
         if (btnAdoptar) {
             const id     = btnAdoptar.dataset.id;
@@ -253,7 +255,7 @@ function adjuntarEventos() {
             abrirModalAdopcion(id, nombre);
         }
     });
-
+// para cerrar el modal de adopcion, se agregan los eventos a los botones de cerrar y cancelar, y al modal mismo para cerrarlo al hacer click fuera del contenido
     modalCerrar.addEventListener('click', cerrarModalAdopcion);
     btnCancelarModal.addEventListener('click', cerrarModalAdopcion);
 
@@ -268,12 +270,11 @@ function adjuntarEventos() {
             cerrarModalAdopcion();
         }
     });
-
+// agrega el evento de envío del formulario de adopción y el botón de cerrar la confirmación
     formAdopcion.addEventListener('submit', manejarEnvioFormulario);
     btnCerrarConfirmacion.addEventListener('click', cerrarModalAdopcion);
 }
 
-/* abre el modal de adopción con la mascota seleccionada */
 function abrirModalAdopcion(id, nombre) {
     if (!modalAdopcion) return;
 
@@ -290,7 +291,6 @@ function abrirModalAdopcion(id, nombre) {
     modalAdopcion.hidden = false;
 }
 
-/* cierra el modal de adopción, limpia errores y reinicia el formulario */
 function cerrarModalAdopcion() {
     if (!modalAdopcion) return;
     modalAdopcion.hidden = true;
@@ -300,7 +300,6 @@ function cerrarModalAdopcion() {
     formAdopcion.reset();
 }
 
-/* limpia los mensajes de error del formulario de adopción */
 function limpiarErroresFormulario() {
     if (errorNombre) errorNombre.textContent = '';
     if (errorEmail) errorEmail.textContent = '';
@@ -308,7 +307,6 @@ function limpiarErroresFormulario() {
     if (errorDireccion) errorDireccion.textContent = '';
 }
 
-/* valida que los campos obligatorios del formulario estén completos y correctos */
 function validarFormularioAdopcion() {
     const nombre    = inputNombre.value.trim();
     const email     = inputEmail.value.trim();
@@ -344,14 +342,13 @@ function validarFormularioAdopcion() {
     return esValido;
 }
 
-/* procesa el formulario de adopción y guarda la solicitud en localStorage */
 function manejarEnvioFormulario(event) {
     event.preventDefault();
 
     if (!validarFormularioAdopcion()) {
         return;
     }
-
+// obtenemos todas las solicitudes guardadas en localStorage, y agregamos la nueva solicitud con los datos del formulario, incluyendo el id y nombre de la mascota seleccionada, y la fecha actual. Luego guardamos la lista actualizada en localStorage y mostramos un mensaje de confirmación al usuario.
     const solicitudesGuardadas = JSON.parse(localStorage.getItem('patitas_solicitudes') || '[]');
     const nuevaSolicitud = {
         id: Date.now(),
@@ -367,7 +364,6 @@ function manejarEnvioFormulario(event) {
 
     solicitudesGuardadas.push(nuevaSolicitud);
     localStorage.setItem('patitas_solicitudes', JSON.stringify(solicitudesGuardadas));
-    localStorage.removeItem('patitas_mascota_seleccionada');
 
     const nombreMascota = nuevaSolicitud.mascota;
     confirmacionTexto.textContent = `Tu solicitud de adopción para ${nombreMascota} fue enviada correctamente.`;
@@ -401,6 +397,7 @@ function mostrarToast(msg, tipo = 'toast-info') {
 }
 
 /* ── EVENTOS FILTROS ── */
+//va aplicando los filtros a medida que el usuario los selecciona, y actualiza la lista de mascotas mostradas en el grid
 campoBusqueda.addEventListener('input', renderizar);
 filtroEspecie.addEventListener('change', renderizar);
 filtroEdad.addEventListener('change', renderizar);
