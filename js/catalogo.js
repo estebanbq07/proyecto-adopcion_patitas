@@ -359,6 +359,7 @@ function manejarEnvioFormulario(event) {
 
     solicitudesGuardadas.push(nuevaSolicitud);
     localStorage.setItem('patitas_solicitudes', JSON.stringify(solicitudesGuardadas));
+    localStorage.removeItem('patitas_mascota_seleccionada');
 
     const nombreMascota = nuevaSolicitud.mascota;
     confirmacionTexto.textContent = `Tu solicitud de adopción para ${nombreMascota} fue enviada correctamente.`;
